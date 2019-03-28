@@ -1,0 +1,36 @@
+{
+  "name": "martinusdev/shipments-tracking",
+  "description": "Czech & Slovak carriers shipments PHP tracking.",
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "require": {
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^6.3",
+    "cakephp/chronos": "^1.2"
+  },
+  "require-dev": {
+    "cakephp/cakephp-codesniffer": "^3.0",
+    "phpunit/phpunit": "^5.7.14|^6.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "MartinusDev\\ShipmentsTracking\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MartinusDev\\ShipmentsTracking\\Test\\": "tests/"
+    }
+  },
+  "scripts": {
+    "check": [
+      "@cs-check",
+      "@test"
+    ],
+    "cs-check": "phpcs --colors --parallel=16 -p src/ tests/",
+    "cs-fix": "phpcbf --colors --parallel=16 -p src/ tests/",
+    "test": "phpunit",
+    "test-coverage": "phpunit --coverage-clover=clover.xml"
+  }
+}
