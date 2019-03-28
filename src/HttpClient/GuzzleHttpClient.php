@@ -2,7 +2,6 @@
 
 namespace MartinusDev\ShipmentsTracking\HttpClient;
 
-
 use GuzzleHttp\Client;
 
 class GuzzleHttpClient implements HttpClientInterface

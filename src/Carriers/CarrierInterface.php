@@ -13,5 +13,4 @@ interface CarrierInterface
     public function getShipment(string $number, array $options): Shipment;
 
     public function getStates(Shipment $shipment): array;
-
 }

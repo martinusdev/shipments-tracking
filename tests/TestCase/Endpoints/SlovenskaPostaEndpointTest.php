@@ -12,7 +12,6 @@ class SlovenskaPostaEndpointTest extends TestCase
 {
     use StringCompareTrait;
 
-
     public function testParseResponse()
     {
         $response = file_get_contents(COMPARISIONS . '/Endpoints/SlovenskaPosta/response_1.json');
@@ -25,6 +24,5 @@ class SlovenskaPostaEndpointTest extends TestCase
         $this->assertInstanceOf(State::class, $deliveredState);
         $this->assertSame('delivered', (string)$deliveredState);
         $this->assertSame('Zásielka vydaná adresátovi na pošte Bratislava 1', $deliveredState->description);
-
     }
 }

@@ -21,10 +21,9 @@ class SlovenskaPostaEndpoint extends Endpoint
         $tracking = $response['parcels'][0];
         $events = $tracking['events'];
         $states = $this->parseEvents($events);
+
         return $states;
-
     }
-
 
     protected function parseEvents($events):array
     {
@@ -44,7 +43,7 @@ class SlovenskaPostaEndpoint extends Endpoint
             'description' => null,
             'original' => [],
         ];
-        $return ['date'] = Chronos::create($event['date'][0], $event['date'][1], $event['date'][2], $event['date'][3], $event['date'][4], $event['date'][5], 'Europe/Bratislava')->setTimezone('UTC');
+        $return['date'] = Chronos::create($event['date'][0], $event['date'][1], $event['date'][2], $event['date'][3], $event['date'][4], $event['date'][5], 'Europe/Bratislava')->setTimezone('UTC');
 
         $return['description'] = preg_replace('/{post}/', $event['post']['name'], $event['desc']['sk']);
         $return['original'] = $event;
@@ -63,7 +62,6 @@ class SlovenskaPostaEndpoint extends Endpoint
                 return NotifiedState::class;
             case 'delivered':
                 return DeliveredState::class;
-
         }
 
         return UnknownState::class;

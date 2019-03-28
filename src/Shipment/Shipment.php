@@ -67,7 +67,5 @@ class Shipment implements JsonSerializable
     public function getTrackingLink(): string
     {
         return $this->trackingLink;
-
-
     }
 }

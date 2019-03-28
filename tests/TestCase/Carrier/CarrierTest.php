@@ -42,5 +42,4 @@ class CarrierTest extends TestCase
             $this->assertInstanceOf(Carrier::class, $carrier);
         }
     }
-
 }

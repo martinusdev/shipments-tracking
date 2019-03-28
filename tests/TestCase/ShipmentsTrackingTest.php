@@ -53,5 +53,4 @@ class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase
         $shipment = $shipmentsTracking->get('abc');
         $this->assertInstanceOf(Shipment::class, $shipment);
     }
-
 }

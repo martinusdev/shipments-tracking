@@ -2,7 +2,6 @@
 
 namespace MartinusDev\ShipmentsTracking\Test\TestSuite;
 
-
 /**
  * Compare a string to the contents of a file
  * CakePHP/StringCompareTrait

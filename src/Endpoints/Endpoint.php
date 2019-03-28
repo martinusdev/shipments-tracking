@@ -26,7 +26,6 @@ abstract class Endpoint
         $response = $this->fetchResponse($trackingUrl);
 
         return $this->parseResponse($response);
-
     }
 
     public function fetchResponse($uri): string
