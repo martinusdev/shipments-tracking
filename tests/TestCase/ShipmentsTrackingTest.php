@@ -52,5 +52,6 @@ class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase
         $shipmentsTracking = new ShipmentsTracking();
         $shipment = $shipmentsTracking->get('abc');
         $this->assertInstanceOf(Shipment::class, $shipment);
+        $this->assertSame('{"number":"abc","carrierName":"Unknown","trackingLink":"","states":[]}', json_encode($shipment));
     }
 }

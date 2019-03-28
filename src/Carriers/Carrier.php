@@ -25,11 +25,11 @@ class Carrier implements CarrierInterface
     /** @var \MartinusDev\ShipmentsTracking\Endpoints\Endpoint */
     protected $endPoint;
 
-    public static function load($carrierName): Carrier
+    public static function load($carrierName, array $options = []): Carrier
     {
         $className = self::getNamespaceName($carrierName);
 
-        return new $className();
+        return new $className($options);
     }
 
     public static function getNamespaceName($carrierName): string

@@ -50,6 +50,7 @@ class Shipment implements JsonSerializable
             'number',
             'carrierName',
             'trackingLink',
+            'states'
         ];
         $data = [];
         foreach ($fields as $field) {

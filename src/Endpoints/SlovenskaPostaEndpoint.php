@@ -12,7 +12,6 @@ use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\UnknownState;
 
 class SlovenskaPostaEndpoint extends Endpoint
 {
-    //https://api.posta.sk/private/search?m=tnt&q=ZB061788670SK,ZB061788666SK
     public $url = 'https://api.posta.sk/private/search?m=tnt&q=$1';
 
     public function parseResponse($responseString): array
@@ -36,7 +35,7 @@ class SlovenskaPostaEndpoint extends Endpoint
         return $states;
     }
 
-    protected function parseEvent($event): State
+    public function parseEvent($event): State
     {
         $return = [
             'date' => null,
