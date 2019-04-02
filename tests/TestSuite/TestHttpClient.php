@@ -2,10 +2,9 @@
 
 namespace MartinusDev\ShipmentsTracking\Test\TestSuite;
 
-use MartinusDev\ShipmentsTracking\HttpClient\HttpClientInterface;
 use PHPUnit\Framework\Assert;
 
-class TestHttpClient extends Assert implements HttpClientInterface
+class TestHttpClient extends Assert
 {
     private $assertCalls;
     private $responses;
@@ -25,7 +24,7 @@ class TestHttpClient extends Assert implements HttpClientInterface
     public function get(string $uri): string
     {
         if (!is_null($this->assertCalls)) {
-            $this->assertNotEmpty($this->assertCalls, 'get() is called, but no assers left');
+            $this->assertNotEmpty($this->assertCalls, 'get() is called, but no asserts left');
             $assertKey = key($this->assertCalls);
             $assert = $this->assertCalls[$assertKey];
             unset($this->assertCalls[$assertKey]);
