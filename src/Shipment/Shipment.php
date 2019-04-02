@@ -4,7 +4,6 @@ namespace MartinusDev\ShipmentsTracking\Shipment;
 
 use JsonSerializable;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
-use RuntimeException;
 
 class Shipment implements JsonSerializable
 {
@@ -51,7 +50,7 @@ class Shipment implements JsonSerializable
             'number',
             'carrierName',
             'trackingLink',
-            'states'
+            'states',
         ];
         $data = [];
         foreach ($fields as $field) {
@@ -61,11 +60,19 @@ class Shipment implements JsonSerializable
         return $data;
     }
 
-    public function getLastState(): State
+    public function toArray(): array
+    {
+        return json_decode(json_encode($this), true);
+    }
+
+    /**
+     * @return State|null
+     */
+    public function getLastState()
     {
         $state = end($this->states);
         if ($state === false) {
-            throw new RuntimeException('States is missing');
+            return null;
         }
 
         return $state;

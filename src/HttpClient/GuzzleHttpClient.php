@@ -14,14 +14,18 @@ class GuzzleHttpClient implements HttpClientInterface
      */
     public function __construct()
     {
-        $this->client = new Client();
+        $defaultOptions = ['verify' => true];
+        if (class_exists('Composer\CaBundle\CaBundle')) {
+            $defaultOptions['verify'] = \Composer\CaBundle\CaBundle::getSystemCaRootBundlePath();
+        }
+        $this->client = new Client($defaultOptions);
     }
 
     /**
      * @param string $uri
      * @return string
      */
-    public function get(string $uri):string
+    public function get(string $uri): string
     {
         return (string)$this->client->get($uri)->getBody();
     }

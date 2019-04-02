@@ -2,6 +2,7 @@
 
 namespace MartinusDev\ShipmentsTracking\Endpoints;
 
+use MartinusDev\ShipmentsTracking\HttpClient\GuzzleHttpClient;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 
 abstract class Endpoint
@@ -16,6 +17,9 @@ abstract class Endpoint
             'trackingUrl' => null,
         ];
         $this->client = $options['client'];
+        if (empty($this->client)) {
+            $this->client = new GuzzleHttpClient();
+        }
     }
 
     abstract public function parseResponse($response): array;

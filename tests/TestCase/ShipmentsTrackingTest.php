@@ -4,6 +4,7 @@ namespace MartinusDev\ShipmentsTracking\Test;
 
 use MartinusDev\ShipmentsTracking\Carriers\Carrier;
 use MartinusDev\ShipmentsTracking\Carriers\UnknownCarrier;
+use MartinusDev\ShipmentsTracking\HttpClient\GuzzleHttpClient;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\ShipmentsTracking;
 
@@ -23,7 +24,7 @@ class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase
      */
     public function testDetectCarrier($number, $carrierName)
     {
-        $carrier = Carrier::load($carrierName);
+        $carrier = Carrier::load($carrierName, ['client' => new GuzzleHttpClient()]);
 
         $shipmentsTracking = new ShipmentsTracking();
         $detectedCarried = $shipmentsTracking->detectCarrier($number);
