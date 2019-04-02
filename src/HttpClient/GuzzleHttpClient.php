@@ -4,7 +4,7 @@ namespace MartinusDev\ShipmentsTracking\HttpClient;
 
 use GuzzleHttp\Client;
 
-class GuzzleHttpClient implements HttpClientInterface
+class GuzzleHttpClient extends AbstractHttpClient implements HttpClientInterface
 {
     /** @var \GuzzleHttp\Client */
     protected $client;

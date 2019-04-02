@@ -5,6 +5,7 @@ namespace MartinusDev\ShipmentsTracking;
 use MartinusDev\ShipmentsTracking\Carriers\Carrier;
 use MartinusDev\ShipmentsTracking\Carriers\CarrierInterface;
 use MartinusDev\ShipmentsTracking\Carriers\UnknownCarrier;
+use MartinusDev\ShipmentsTracking\HttpClient\CakeHttpClient;
 use MartinusDev\ShipmentsTracking\HttpClient\GuzzleHttpClient;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 
@@ -21,7 +22,7 @@ class ShipmentsTracking
             'preferredCarriers' => [],
         ];
         if (empty($options['client'])) {
-            $options['client'] = new GuzzleHttpClient();
+            $options['client'] = $this->defaultHttpClient();
         }
         $this->client = new $options['client']();
         $this->preferredCarriers = $options['preferredCarriers'];
@@ -71,5 +72,16 @@ class ShipmentsTracking
         $carriers = array_diff($carriers, $preferredCarriers);
 
         return $preferredCarriers + $carriers;
+    }
+
+    private function defaultHttpClient()
+    {
+        if (class_exists('Cake\Http\Client')) {
+            return new CakeHttpClient();
+        }
+        if (class_exists('GuzzleHttp\Client')) {
+            return new GuzzleHttpClient();
+        }
+        throw new \RuntimeException('Client not found');
     }
 }

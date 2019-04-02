@@ -6,7 +6,6 @@
   "minimum-stability": "stable",
   "require": {
     "ext-json": "*",
-    "guzzlehttp/guzzle": "^6.3",
     "cakephp/chronos": "^1.2"
   },
   "require-dev": {
@@ -22,6 +21,9 @@
     "psr-4": {
       "MartinusDev\\ShipmentsTracking\\Test\\": "tests/"
     }
+  },
+  "suggest": {
+    "guzzlehttp/guzzle": "Http Client"
   },
   "scripts": {
     "check": [
