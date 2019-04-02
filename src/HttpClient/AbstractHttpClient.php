@@ -4,7 +4,7 @@ namespace MartinusDev\ShipmentsTracking\HttpClient;
 
 use JsonSerializable;
 
-class AbstractHttpClient implements JsonSerializable
+abstract class AbstractHttpClient implements JsonSerializable
 {
     function __toString()
     {
