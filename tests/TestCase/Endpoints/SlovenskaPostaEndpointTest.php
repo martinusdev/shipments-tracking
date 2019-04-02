@@ -4,12 +4,10 @@ namespace MartinusDev\ShipmentsTracking\Test\TestCase\Endpoints;
 
 use MartinusDev\ShipmentsTracking\Endpoints\SlovenskaPostaEndpoint;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
-use MartinusDev\ShipmentsTracking\Test\TestSuite\StringCompareTrait;
 use PHPUnit\Framework\TestCase;
 
 class SlovenskaPostaEndpointTest extends TestCase
 {
-    use StringCompareTrait;
 
     public function testParseResponse()
     {

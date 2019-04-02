@@ -22,6 +22,6 @@ class ShipmentTest extends TestCase
         //string
         $this->assertSame('abc', (string)$shipment);
         //json
-        $this->assertSame('{"number":"abc","carrierName":"Unknown","trackingLink":"http:\/\/www.example.com\/tracking\/abc"}', json_encode($shipment));
+        $this->assertSame('{"number":"abc","carrierName":"Unknown","trackingLink":"http:\/\/www.example.com\/tracking\/abc","states":[]}', json_encode($shipment));
     }
 }
