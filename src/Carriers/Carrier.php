@@ -86,7 +86,13 @@ class Carrier implements CarrierInterface
      */
     public function getTrackingUrl(string $number): string
     {
-        return preg_replace('/\$1/', $number, $this->url);
+        $url = preg_replace('/\$1/', $number, $this->url);
+        if (is_string($url)) {
+
+            return $url;
+        }
+
+        throw new \RuntimeException('Invalid $url type');
     }
 
     /**
