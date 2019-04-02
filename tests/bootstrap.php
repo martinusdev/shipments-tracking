@@ -2,7 +2,11 @@
 
 define('COMPARISIONS', __DIR__ . '/' . 'comparisons');
 
-print_r(COMPARISIONS);
+if (is_file('vendor/autoload.php')) {
+    require_once 'vendor/autoload.php';
+} else {
+    require_once dirname(__DIR__) . '/vendor/autoload.php';
+}
 
 function pr($var)
 {
