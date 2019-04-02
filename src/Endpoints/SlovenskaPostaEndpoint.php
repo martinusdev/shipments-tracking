@@ -32,7 +32,7 @@ class SlovenskaPostaEndpoint extends Endpoint
      * @param array $events
      * @return array
      */
-    protected function parseEvents($events):array
+    protected function parseEvents($events): array
     {
         $states = [];
         foreach ($events as $event) {
@@ -86,8 +86,14 @@ class SlovenskaPostaEndpoint extends Endpoint
      * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment
      * @return string
      */
-    protected function getUrl(Shipment $shipment)
+    protected function getUrl(Shipment $shipment): string
     {
-        return (string)preg_replace('/\$1/', $shipment->number, $this->url);
+        $url = preg_replace('/\$1/', $shipment->number, $this->url);
+        if (is_string($url)) {
+
+            return $url;
+        }
+
+        throw new \RuntimeException('Invalid $url type');
     }
 }
