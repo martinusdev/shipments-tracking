@@ -77,7 +77,7 @@ class Carrier implements CarrierInterface
             throw new \RuntimeException('Regex property missing in ' . get_class($this));
         }
 
-        return preg_match(static::REGEX, $number);
+        return !!preg_match(static::REGEX, $number);
     }
 
     /**

@@ -44,7 +44,7 @@ class SlovenskaPostaEndpoint extends Endpoint
     }
 
     /**
-     * @param $event
+     * @param array $event
      * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State
      */
     public function parseEvent($event): State
@@ -84,10 +84,10 @@ class SlovenskaPostaEndpoint extends Endpoint
 
     /**
      * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment
-     * @return string|string[]|null
+     * @return string
      */
     protected function getUrl(Shipment $shipment)
     {
-        return preg_replace('/\$1/', $shipment->number, $this->url);
+        return (string)preg_replace('/\$1/', $shipment->number, $this->url);
     }
 }

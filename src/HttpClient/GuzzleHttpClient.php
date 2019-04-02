@@ -23,6 +23,6 @@ class GuzzleHttpClient implements HttpClientInterface
      */
     public function get(string $uri):string
     {
-        return (string)$this->client->get($uri);
+        return (string)$this->client->get($uri)->getBody();
     }
 }
