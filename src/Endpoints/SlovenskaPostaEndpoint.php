@@ -14,6 +14,10 @@ class SlovenskaPostaEndpoint extends Endpoint
 {
     public $url = 'https://api.posta.sk/private/search?m=tnt&q=$1';
 
+    /**
+     * @param string $responseString
+     * @return array
+     */
     public function parseResponse($responseString): array
     {
         $response = json_decode($responseString, true);
@@ -24,6 +28,10 @@ class SlovenskaPostaEndpoint extends Endpoint
         return $states;
     }
 
+    /**
+     * @param array $events
+     * @return array
+     */
     protected function parseEvents($events):array
     {
         $states = [];
@@ -35,6 +43,10 @@ class SlovenskaPostaEndpoint extends Endpoint
         return $states;
     }
 
+    /**
+     * @param $event
+     * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State
+     */
     public function parseEvent($event): State
     {
         $return = [
@@ -52,6 +64,10 @@ class SlovenskaPostaEndpoint extends Endpoint
         return new $stateClass($return);
     }
 
+    /**
+     * @param string $eventState
+     * @return string
+     */
     protected function getStateClass($eventState)
     {
         switch ($eventState) {
@@ -66,6 +82,10 @@ class SlovenskaPostaEndpoint extends Endpoint
         return UnknownState::class;
     }
 
+    /**
+     * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment
+     * @return string|string[]|null
+     */
     protected function getUrl(Shipment $shipment)
     {
         return preg_replace('/\$1/', $shipment->number, $this->url);

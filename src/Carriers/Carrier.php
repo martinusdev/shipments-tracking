@@ -25,6 +25,11 @@ class Carrier implements CarrierInterface
     /** @var \MartinusDev\ShipmentsTracking\Endpoints\Endpoint */
     protected $endPoint;
 
+    /**
+     * @param string $carrierName
+     * @param array $options
+     * @return \MartinusDev\ShipmentsTracking\Carriers\Carrier
+     */
     public static function load($carrierName, array $options = []): Carrier
     {
         $className = self::getNamespaceName($carrierName);
@@ -32,6 +37,10 @@ class Carrier implements CarrierInterface
         return new $className($options);
     }
 
+    /**
+     * @param string $carrierName
+     * @return string
+     */
     public static function getNamespaceName($carrierName): string
     {
         if (!in_array($carrierName, self::CARRIERS)) {
@@ -41,6 +50,11 @@ class Carrier implements CarrierInterface
         return __NAMESPACE__ . '\\' . $carrierName . 'Carrier';
     }
 
+    /**
+     * Carrier constructor.
+     *
+     * @param array $options
+     */
     public function __construct(array $options = [])
     {
         $options += [
@@ -66,11 +80,20 @@ class Carrier implements CarrierInterface
         return preg_match(static::REGEX, $number);
     }
 
+    /**
+     * @param string $number
+     * @return string
+     */
     public function getTrackingUrl(string $number): string
     {
         return preg_replace('/\$1/', $number, $this->url);
     }
 
+    /**
+     * @param string $number
+     * @param array $options
+     * @return \MartinusDev\ShipmentsTracking\Shipment\Shipment
+     */
     public function getShipment(string $number, $options = []): Shipment
     {
         $shipment = new Shipment([
@@ -83,6 +106,10 @@ class Carrier implements CarrierInterface
         return $shipment;
     }
 
+    /**
+     * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment
+     * @return array
+     */
     public function getStates(Shipment $shipment): array
     {
         if (empty($this->endPoint)) {
