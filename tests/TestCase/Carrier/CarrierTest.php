@@ -23,11 +23,11 @@ class CarrierTest extends TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Carrier DummyCarrierName does not exists
      */
     public function testLoadNotExists()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Carrier DummyCarrierName does not exists');
         $name = 'DummyCarrierName';
         Carrier::load($name);
     }
