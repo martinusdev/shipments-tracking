@@ -64,9 +64,10 @@ class Shipment implements JsonSerializable
     public function getLastState(): State
     {
         $state = end($this->states);
-        if($state===false) {
+        if ($state === false) {
             throw new RuntimeException('States is missing');
         }
+
         return $state;
     }
 
