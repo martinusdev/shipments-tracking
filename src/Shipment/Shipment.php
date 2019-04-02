@@ -62,7 +62,8 @@ class Shipment implements JsonSerializable
 
     public function toArray(): array
     {
-        return json_decode(json_encode($this), true);
+        $json = (string)json_encode($this);
+        return json_decode($json, true);
     }
 
     /**
