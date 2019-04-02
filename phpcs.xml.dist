@@ -9,4 +9,14 @@
     <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
         <severity>0</severity>
     </rule>
+
+    <!-- Funkcie a metody nemusia mat doc block -->
+    <rule ref="CakePHP.Commenting.FunctionComment.Missing">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Doc block s @param nemusi obsahovat popis parametra -->
+    <rule ref="CakePHP.Commenting.FunctionComment.MissingParamComment">
+        <severity>0</severity>
+    </rule>
 </ruleset>
