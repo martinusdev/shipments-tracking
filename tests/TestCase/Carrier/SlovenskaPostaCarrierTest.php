@@ -27,8 +27,8 @@ class SlovenskaPostaCarrierTest extends TestCase
         return [
             ['ZB079400152SK', 1],
             ['RR079400152SK', 1],
-            ['ZB079400152CZ', 0],   //cz na konci
-            ['01079400152SK', 0],   //bez zaciatocnych pismen
+            ['ZB079400152CZ', 0], //cz na konci
+            ['01079400152SK', 0], //bez zaciatocnych pismen
         ];
     }
 

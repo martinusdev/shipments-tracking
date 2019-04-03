@@ -6,7 +6,7 @@ use JsonSerializable;
 
 abstract class AbstractHttpClient implements JsonSerializable
 {
-    function __toString()
+    public function __toString()
     {
         return self::class;
     }

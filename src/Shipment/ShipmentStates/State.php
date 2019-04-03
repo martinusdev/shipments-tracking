@@ -32,7 +32,7 @@ abstract class State implements JsonSerializable
         $this->original = $data['original'];
     }
 
-    function __toString()
+    public function __toString()
     {
         return $this->name;
     }

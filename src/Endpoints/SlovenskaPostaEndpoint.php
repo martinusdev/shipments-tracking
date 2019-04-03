@@ -90,7 +90,6 @@ class SlovenskaPostaEndpoint extends Endpoint
     {
         $url = preg_replace('/\$1/', $shipment->number, $this->url);
         if (is_string($url)) {
-
             return $url;
         }
 
