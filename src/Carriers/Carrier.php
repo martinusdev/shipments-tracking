@@ -19,8 +19,6 @@ class Carrier implements CarrierInterface
     protected $endPointClass;
 
     protected const REGEX = null;
-    /** @var \MartinusDev\ShipmentsTracking\HttpClient\HttpClientInterface */
-    protected $client;
 
     /** @var \MartinusDev\ShipmentsTracking\Endpoints\Endpoint */
     protected $endPoint;
@@ -57,10 +55,8 @@ class Carrier implements CarrierInterface
      */
     public function __construct(array $options = [])
     {
-        $options += [
-            'client' => null,
-        ];
-        $this->client = $options['client'];
+        $options += [];
+
         if ($this->endPointClass) {
             $this->endPoint = new $this->endPointClass($options);
         }

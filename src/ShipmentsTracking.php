@@ -11,7 +11,7 @@ use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 class ShipmentsTracking
 {
     /** @var \MartinusDev\ShipmentsTracking\HttpClient\HttpClientInterface */
-    protected $client;
+    public static $client;
     protected $preferredCarriers = [];
 
     public function __construct($options = [])
@@ -23,7 +23,7 @@ class ShipmentsTracking
         if (empty($options['client'])) {
             $options['client'] = new GuzzleHttpClient();
         }
-        $this->client = new $options['client']();
+        self::$client = $options['client'];
         $this->preferredCarriers = $options['preferredCarriers'];
     }
 
@@ -40,7 +40,7 @@ class ShipmentsTracking
             $carrierNamespaceName = Carrier::getNamespaceName($name);
             $regex = constant($carrierNamespaceName . '::REGEX');
             if (preg_match($regex, $number)) {
-                return new $carrierNamespaceName(['client' => $this->client]);
+                return new $carrierNamespaceName();
             }
         }
 

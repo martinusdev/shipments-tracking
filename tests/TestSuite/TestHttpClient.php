@@ -30,6 +30,9 @@ class TestHttpClient extends Assert
             unset($this->assertCalls[$assertKey]);
             $this->assertSame($assert, $uri);
         }
+        if (empty($this->responses)) {
+            return '';
+        }
 
         $responseKey = key($this->responses);
         $response = $this->responses[$responseKey];
