@@ -5,6 +5,7 @@
   "license": "MIT",
   "minimum-stability": "stable",
   "require": {
+    "php": ">=7.1",
     "ext-json": "*",
     "cakephp/chronos": "^1.2"
   },
