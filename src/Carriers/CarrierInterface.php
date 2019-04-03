@@ -24,7 +24,7 @@ interface CarrierInterface
      * @param array $options
      * @return \MartinusDev\ShipmentsTracking\Shipment\Shipment
      */
-    public function getShipment(string $number, array $options): Shipment;
+    public function getShipment(string $number, array $options = []): Shipment;
 
     /**
      * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment

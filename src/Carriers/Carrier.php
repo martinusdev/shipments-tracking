@@ -73,7 +73,7 @@ class Carrier implements CarrierInterface
             throw new \RuntimeException('Regex property missing in ' . get_class($this));
         }
 
-        return !!preg_match(static::REGEX, $number);
+        return (bool)preg_match(static::REGEX, $number);
     }
 
     /**
@@ -84,7 +84,6 @@ class Carrier implements CarrierInterface
     {
         $url = preg_replace('/\$1/', $number, $this->url);
         if (is_string($url)) {
-
             return $url;
         }
 
@@ -96,7 +95,7 @@ class Carrier implements CarrierInterface
      * @param array $options
      * @return \MartinusDev\ShipmentsTracking\Shipment\Shipment
      */
-    public function getShipment(string $number, $options = []): Shipment
+    public function getShipment(string $number, array $options = []): Shipment
     {
         $shipment = new Shipment([
             'carrierName' => static::NAME,
