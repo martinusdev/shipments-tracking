@@ -59,7 +59,7 @@ class SlovenskaPostaEndpoint extends Endpoint
         $return['description'] = preg_replace('/{post}/', $event['post']['name'], $event['desc']['sk']);
         $return['original'] = $event;
 
-        $stateClass = $this->getStateClass($event['state']);
+        $stateClass = $this->getStateClass($event['state'] ?? null);
 
         return new $stateClass($return);
     }
