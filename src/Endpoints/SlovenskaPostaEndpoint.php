@@ -49,6 +49,12 @@ class SlovenskaPostaEndpoint extends Endpoint
      */
     public function parseEvent($event): State
     {
+        $event += [
+            'state' => null,
+            'post' => [
+                'name' => null,
+            ],
+        ];
         $return = [
             'date' => null,
             'description' => null,
@@ -59,7 +65,7 @@ class SlovenskaPostaEndpoint extends Endpoint
         $return['description'] = preg_replace('/{post}/', $event['post']['name'], $event['desc']['en']);
         $return['original'] = $event;
 
-        $stateClass = $this->getStateClass($event['state'] ?? null);
+        $stateClass = $this->getStateClass($event['state']);
 
         return new $stateClass($return);
     }
