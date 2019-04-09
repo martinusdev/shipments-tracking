@@ -20,7 +20,7 @@ class SlovenskaPostaEndpointTest extends TestCase
         $deliveredState = $parsed[2];
         $this->assertInstanceOf(State::class, $deliveredState);
         $this->assertSame('delivered', (string)$deliveredState);
-        $this->assertSame('Zásielka vydaná adresátovi na pošte Bratislava 1', $deliveredState->description);
+        $this->assertSame('Item delivered to the Addressee at the post office Bratislava 1', $deliveredState->description);
     }
 
     /**
@@ -37,6 +37,7 @@ class SlovenskaPostaEndpointTest extends TestCase
             ],
             'desc' => [
                 'sk' => 'Test state ' . $stateName,
+                'en' => 'Test state ' . $stateName,
             ],
             'post' => [
                 'id' => 1,
