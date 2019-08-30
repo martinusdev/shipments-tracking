@@ -9,6 +9,7 @@ use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\NotifiedState;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\ReceivedState;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\UnknownState;
+use RuntimeException;
 
 class SlovenskaPostaEndpoint extends Endpoint
 {
@@ -82,6 +83,7 @@ class SlovenskaPostaEndpoint extends Endpoint
             case 'notified':
                 return NotifiedState::class;
             case 'delivered':
+            case 'returned':
                 return DeliveredState::class;
         }
 
@@ -99,6 +101,6 @@ class SlovenskaPostaEndpoint extends Endpoint
             return $url;
         }
 
-        throw new \RuntimeException('Invalid $url type');
+        throw new RuntimeException('Invalid $url type');
     }
 }
