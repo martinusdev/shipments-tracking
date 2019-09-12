@@ -74,7 +74,7 @@ class SlovenskaPostaEndpointTest extends TestCase
                 [
                     'state' => 'returned',
                 ],
-                'delivered',
+                'returned',
             ],
         ];
     }
