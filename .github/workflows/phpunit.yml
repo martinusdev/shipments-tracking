@@ -9,12 +9,12 @@ jobs:
     env:
       APP_ENV: test
       extensions: mbstring, xml, ctype, iconv, mysql, imagick, openssl, intl
-      key: cache-v20210322-1 # can be any string, change to clear the extension cache.
+      key: cache-v20220204 # can be any string, change to clear the extension cache.
     strategy:
       fail-fast: false
       max-parallel: 3
       matrix:
-        php-versions: [ '7.3' ]
+        php-versions: [ '7.3', '7.4' ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
