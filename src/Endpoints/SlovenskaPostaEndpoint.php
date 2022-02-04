@@ -18,21 +18,19 @@ class SlovenskaPostaEndpoint extends Endpoint
 
     /**
      * @param string $responseString
-     * @return array
+     * @return State[]
      */
-    public function parseResponse($responseString): array
+    public function parseResponse(string $responseString): array
     {
         $response = json_decode($responseString, true);
         $tracking = $response['parcels'][0];
         $events = $tracking['events'];
-        $states = $this->parseEvents($events);
-
-        return $states;
+        return $this->parseEvents($events);
     }
 
     /**
      * @param array $events
-     * @return array
+     * @return State[]
      */
     protected function parseEvents($events): array
     {

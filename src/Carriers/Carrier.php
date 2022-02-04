@@ -2,34 +2,38 @@
 
 namespace MartinusDev\ShipmentsTracking\Carriers;
 
+use MartinusDev\ShipmentsTracking\Endpoints\Endpoint;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
+use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 
 class Carrier implements CarrierInterface
 {
 
     const NAME = '';
 
+    /** @var string[] */
     const CARRIERS = [
         SlovenskaPostaCarrier::NAME,
     ];
 
-    protected $regex;
-    protected $method;
+    /** @var string */
     protected $url;
+    /** @var string|Endpoint */
     protected $endPointClass;
 
     protected const REGEX = null;
 
-    /** @var \MartinusDev\ShipmentsTracking\Endpoints\Endpoint */
-    protected $endPoint;
+    /** @var \MartinusDev\ShipmentsTracking\Endpoints\Endpoint|null */
+    protected $endPoint = null;
 
     /**
      * @param string $carrierName
-     * @param array $options
+     * @param array<string,mixed> $options
      * @return \MartinusDev\ShipmentsTracking\Carriers\Carrier
      */
-    public static function load($carrierName, array $options = []): Carrier
+    public static function load(string $carrierName, array $options = []): Carrier
     {
+        /** @var Carrier $className */
         $className = self::getNamespaceName($carrierName);
 
         return new $className($options);
@@ -39,7 +43,7 @@ class Carrier implements CarrierInterface
      * @param string $carrierName
      * @return string
      */
-    public static function getNamespaceName($carrierName): string
+    public static function getNamespaceName(string $carrierName): string
     {
         if (!in_array($carrierName, self::CARRIERS)) {
             throw new \RuntimeException('Carrier ' . $carrierName . ' does not exists');
@@ -51,7 +55,7 @@ class Carrier implements CarrierInterface
     /**
      * Carrier constructor.
      *
-     * @param array $options
+     * @param array<string, mixed> $options
      */
     public function __construct(array $options = [])
     {
@@ -92,7 +96,7 @@ class Carrier implements CarrierInterface
 
     /**
      * @param string $number
-     * @param array $options
+     * @param array<string,mixed> $options
      * @return \MartinusDev\ShipmentsTracking\Shipment\Shipment
      */
     public function getShipment(string $number, array $options = []): Shipment
@@ -109,7 +113,7 @@ class Carrier implements CarrierInterface
 
     /**
      * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment
-     * @return array
+     * @return State[]
      */
     public function getStates(Shipment $shipment): array
     {

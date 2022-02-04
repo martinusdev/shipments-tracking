@@ -12,8 +12,12 @@ class ShipmentsTracking
 {
     /** @var \MartinusDev\ShipmentsTracking\HttpClient\HttpClientInterface */
     public static $client;
+    /** @var string[] */
     protected $preferredCarriers = [];
 
+    /**
+     * @param array<string,mixed> $options
+     */
     public function __construct($options = [])
     {
         $options += [
@@ -27,7 +31,12 @@ class ShipmentsTracking
         $this->preferredCarriers = $options['preferredCarriers'];
     }
 
-    public function detectCarrier(string $number, $options = []): CarrierInterface
+    /**
+     * @param string $number
+     * @param array<string,array<string,mixed>> $options
+     * @return CarrierInterface
+     */
+    public function detectCarrier(string $number, array $options = []): CarrierInterface
     {
         $options += [
             'preferredCarriers' => [],
@@ -37,16 +46,25 @@ class ShipmentsTracking
         $carriers = $this->sortWithPreferred($carriers, $options['preferredCarriers']);
 
         foreach ($carriers as $name) {
+            /** @var string|CarrierInterface $carrierNamespaceName */
             $carrierNamespaceName = Carrier::getNamespaceName($name);
+            /** @var string $regex */
             $regex = constant($carrierNamespaceName . '::REGEX');
             if (preg_match($regex, $number)) {
-                return new $carrierNamespaceName();
+                /** @var CarrierInterface $carrier */
+                $carrier = new $carrierNamespaceName();
+                return $carrier;
             }
         }
 
         return new UnknownCarrier();
     }
 
+    /**
+     * @param string $number
+     * @param array<string,mixed> $options
+     * @return string
+     */
     public function getTrackingLink(string $number, array $options = []): string
     {
         $shipment = $this->get($number, $options);
@@ -54,6 +72,11 @@ class ShipmentsTracking
         return $shipment->getTrackingLink();
     }
 
+    /**
+     * @param string $number
+     * @param array<string,mixed> $options
+     * @return Shipment
+     */
     public function get(string $number, array $options = []): Shipment
     {
         $carrier = $this->detectCarrier($number, $options);
@@ -62,9 +85,9 @@ class ShipmentsTracking
     }
 
     /**
-     * @param array $carriers
-     * @param array $preferredCarriers
-     * @return array
+     * @param string[] $carriers
+     * @param string[] $preferredCarriers
+     * @return string[]
      */
     private function sortWithPreferred(array $carriers, array $preferredCarriers): array
     {

@@ -11,6 +11,8 @@ class SlovenskaPostaCarrier extends Carrier
     protected $endPointClass = SlovenskaPostaEndpoint::class;
 
     const REGEX = '/^([A-Z]{2}[0-9]{9}SK)$/i';
+    /** @var string  */
     protected $method = 'GET';
+    /** @var string  */
     protected $url = 'https://tandt.posta.sk/zasielky/$1';
 }

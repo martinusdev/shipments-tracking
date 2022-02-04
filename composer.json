@@ -10,12 +10,14 @@
     "php": ">=7.1",
     "ext-json": "*",
 
-    "cakephp/chronos": "^1.2"
+    "cakephp/chronos": "^1.2",
+    "guzzlehttp/guzzle": "^7.4"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.0",
     "cakephp/cakephp-codesniffer": "^3.0",
-    "phpunit/phpunit": "^5.7.14|^6.0"
+    "phpunit/phpunit": "^5.7.14|^6.0",
+    "phpstan/phpstan": "~1.4"
   },
   "autoload": {
     "psr-4": {
@@ -37,8 +39,8 @@
     ],
     "cs-check": "phpcs --colors --parallel=16 -p src/ tests/",
     "cs-fix": "phpcbf --colors --parallel=16 -p src/ tests/",
-    "test": "phpunit",
+    "test": "phpunit --no-coverage",
     "test-coverage": "phpunit --coverage-clover=clover.xml",
-    "phpstan": "phpstan analyse -l max -c phpstan.neon src/"
+    "phpstan": "composer require guzzlehttp/guzzle && phpstan analyse -l 5 src/"
   }
 }

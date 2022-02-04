@@ -9,6 +9,7 @@ class Shipment implements JsonSerializable
 {
     /** @var \MartinusDev\ShipmentsTracking\Carriers\CarrierInterface */
     public $carrier;
+    /** @var string|null */
     public $carrierName;
     /** @var string */
     public $number = '';
@@ -20,9 +21,9 @@ class Shipment implements JsonSerializable
     /**
      * Shipment constructor.
      *
-     * @param array $data
+     * @param array<string,mixed> $data
      */
-    public function __construct($data)
+    public function __construct(array $data = [])
     {
         $data += [
             'number' => null,

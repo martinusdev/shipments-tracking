@@ -3,13 +3,14 @@
 namespace MartinusDev\ShipmentsTracking\Carriers;
 
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
+use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 
 interface CarrierInterface
 {
     /**
      * CarrierInterface constructor.
      *
-     * @param array $options
+     * @param array<string,mixed> $options
      */
     public function __construct(array $options = []);
 
@@ -21,14 +22,14 @@ interface CarrierInterface
 
     /**
      * @param string $number
-     * @param array $options
+     * @param array<string,mixed> $options
      * @return \MartinusDev\ShipmentsTracking\Shipment\Shipment
      */
     public function getShipment(string $number, array $options = []): Shipment;
 
     /**
      * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment
-     * @return array
+     * @return State[]
      */
     public function getStates(Shipment $shipment): array;
 }
