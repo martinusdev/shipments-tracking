@@ -69,9 +69,9 @@ class Shipment implements JsonSerializable
     }
 
     /**
-     * @return State|null
+     * @return ?State
      */
-    public function getLastState()
+    public function getLastState(): ?State
     {
         $state = end($this->states);
         if ($state === false) {
