@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MartinusDev\ShipmentsTracking\Shipment;
 
 use JsonSerializable;
+use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 
 class Shipment implements JsonSerializable
 {
@@ -79,9 +80,9 @@ class Shipment implements JsonSerializable
     }
 
     /**
-     * @return ?State
+     * @return ?\MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State
      */
-    public function getLastState(): ?State
+    public function getLastState(): ?\MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State
     {
         $state = end($this->states);
         if ($state === false) {
