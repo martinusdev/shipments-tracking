@@ -1,21 +1,31 @@
 <?php
+declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Shipment;
 
 use JsonSerializable;
-use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 
 class Shipment implements JsonSerializable
 {
-    /** @var \MartinusDev\ShipmentsTracking\Carriers\CarrierInterface */
+    /**
+     * @var \MartinusDev\ShipmentsTracking\Carriers\CarrierInterface
+     */
     public $carrier;
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     public $carrierName;
-    /** @var string */
+    /**
+     * @var string
+     */
     public $number = '';
-    /** @var string */
+    /**
+     * @var string
+     */
     public $trackingLink;
-    /** @var State[] */
+    /**
+     * @var \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
+     */
     public $states;
 
     /**

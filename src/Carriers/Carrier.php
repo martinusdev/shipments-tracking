@@ -1,29 +1,33 @@
 <?php
+declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Carriers;
 
-use MartinusDev\ShipmentsTracking\Endpoints\Endpoint;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
-use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 
 class Carrier implements CarrierInterface
 {
-
-    const NAME = '';
+    public const NAME = '';
 
     /** @var string[] */
-    const CARRIERS = [
+    public const CARRIERS = [
         SlovenskaPostaCarrier::NAME,
     ];
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $url;
-    /** @var string|Endpoint */
+    /**
+     * @var string|\MartinusDev\ShipmentsTracking\Endpoints\Endpoint
+     */
     protected $endPointClass;
 
     protected const REGEX = null;
 
-    /** @var \MartinusDev\ShipmentsTracking\Endpoints\Endpoint|null */
+    /**
+     * @var \MartinusDev\ShipmentsTracking\Endpoints\Endpoint|null
+     */
     protected $endPoint = null;
 
     /**
@@ -33,7 +37,7 @@ class Carrier implements CarrierInterface
      */
     public static function load(string $carrierName, array $options = []): Carrier
     {
-        /** @var Carrier $className */
+        /** @var \MartinusDev\ShipmentsTracking\Carriers\Carrier $className */
         $className = self::getNamespaceName($carrierName);
 
         return new $className($options);
@@ -113,7 +117,7 @@ class Carrier implements CarrierInterface
 
     /**
      * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment
-     * @return State[]
+     * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
      */
     public function getStates(Shipment $shipment): array
     {

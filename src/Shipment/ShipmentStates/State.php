@@ -8,22 +8,29 @@
 
 namespace MartinusDev\ShipmentsTracking\Shipment\ShipmentStates;
 
-use Cake\Chronos\Chronos;
 use JsonSerializable;
 
 abstract class State implements JsonSerializable
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $name;
-    /** @var \Cake\Chronos\Chronos */
+    /**
+     * @var \Cake\Chronos\Chronos
+     */
     public $date;
-    /** @var string */
+    /**
+     * @var string
+     */
     public $description;
-    /** @var string[] */
+    /**
+     * @var string[]
+     */
     public $original;
 
     /**
-     * @param array<string,array<string>|string|Chronos> $data
+     * @param array<string, (array<string>|string|\Cake\Chronos\Chronos)> $data
      */
     public function __construct(array $data = [])
     {

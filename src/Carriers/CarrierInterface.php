@@ -29,7 +29,7 @@ interface CarrierInterface
 
     /**
      * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment
-     * @return State[]
+     * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
      */
     public function getStates(Shipment $shipment): array;
 }

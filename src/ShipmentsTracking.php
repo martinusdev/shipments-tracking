@@ -10,9 +10,13 @@ use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 
 class ShipmentsTracking
 {
-    /** @var \MartinusDev\ShipmentsTracking\HttpClient\HttpClientInterface */
+    /**
+     * @var \MartinusDev\ShipmentsTracking\HttpClient\HttpClientInterface
+     */
     public static $client;
-    /** @var string[] */
+    /**
+     * @var string[]
+     */
     protected $preferredCarriers = [];
 
     /**
@@ -34,7 +38,7 @@ class ShipmentsTracking
     /**
      * @param string $number
      * @param array<string,array<string,mixed>> $options
-     * @return CarrierInterface
+     * @return \MartinusDev\ShipmentsTracking\Carriers\CarrierInterface
      */
     public function detectCarrier(string $number, array $options = []): CarrierInterface
     {
@@ -46,13 +50,14 @@ class ShipmentsTracking
         $carriers = $this->sortWithPreferred($carriers, $options['preferredCarriers']);
 
         foreach ($carriers as $name) {
-            /** @var string|CarrierInterface $carrierNamespaceName */
+            /** @var string|\MartinusDev\ShipmentsTracking\Carriers\CarrierInterface $carrierNamespaceName */
             $carrierNamespaceName = Carrier::getNamespaceName($name);
             /** @var string $regex */
             $regex = constant($carrierNamespaceName . '::REGEX');
             if (preg_match($regex, $number)) {
-                /** @var CarrierInterface $carrier */
+                /** @var \MartinusDev\ShipmentsTracking\Carriers\CarrierInterface $carrier */
                 $carrier = new $carrierNamespaceName();
+
                 return $carrier;
             }
         }
@@ -75,7 +80,7 @@ class ShipmentsTracking
     /**
      * @param string $number
      * @param array<string,mixed> $options
-     * @return Shipment
+     * @return \MartinusDev\ShipmentsTracking\Shipment\Shipment
      */
     public function get(string $number, array $options = []): Shipment
     {
