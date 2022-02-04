@@ -6,13 +6,17 @@ use MartinusDev\ShipmentsTracking\Endpoints\SlovenskaPostaEndpoint;
 
 class SlovenskaPostaCarrier extends Carrier
 {
-    const NAME = 'SlovenskaPosta';
+    public const NAME = 'SlovenskaPosta';
 
     protected $endPointClass = SlovenskaPostaEndpoint::class;
 
-    const REGEX = '/^([A-Z]{2}[0-9]{9}SK)$/i';
-    /** @var string  */
+    public const REGEX = '/^([A-Z]{2}[0-9]{9}SK)$/i';
+    /**
+     * @var string
+     */
     protected $method = 'GET';
-    /** @var string  */
+    /**
+     * @var string
+     */
     protected $url = 'https://tandt.posta.sk/zasielky/$1';
 }

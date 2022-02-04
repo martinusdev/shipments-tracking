@@ -17,13 +17,13 @@ abstract class Endpoint
 
     /**
      * @param string $responseString
-     * @return State[]
+     * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
      */
     abstract public function parseResponse(string $responseString): array;
 
     /**
-     * @param Shipment $shipment
-     * @return State[]
+     * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment
+     * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
      */
     public function getStates(Shipment $shipment)
     {
