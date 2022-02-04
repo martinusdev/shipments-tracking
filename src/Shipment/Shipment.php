@@ -79,7 +79,7 @@ class Shipment implements JsonSerializable
     }
 
     /**
-     * @return ?State
+     * @return ?\MartinusDev\ShipmentsTracking\Shipment\State
      */
     public function getLastState(): ?State
     {
