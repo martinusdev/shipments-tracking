@@ -62,7 +62,7 @@ class SlovenskaPostaEndpoint extends Endpoint
             'description' => null,
             'original' => [],
         ];
-        $return['date'] = Chronos::create($event['date'][0], $event['date'][1], $event['date'][2], $event['date'][3], $event['date'][4], $event['date'][5], 'Europe/Bratislava')->setTimezone('UTC');
+        $return['date'] = Chronos::createFromDate($event['date'][0], $event['date'][1], $event['date'][2], 'Europe/Bratislava')->setTime($event['date'][3], $event['date'][4], $event['date'][5])->setTimezone('UTC');
 
         $return['description'] = preg_replace('/{post}/', $event['post']['name'], $event['desc']['en']);
         $return['original'] = $event;
