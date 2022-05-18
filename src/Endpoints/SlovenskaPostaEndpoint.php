@@ -31,8 +31,8 @@ class SlovenskaPostaEndpoint extends Endpoint
     }
 
     /**
-     * @param array $events
-     * @return array|null
+     * @param array|null $events
+     * @return array
      */
     protected function parseEvents(?array $events): array
     {
