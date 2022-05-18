@@ -32,14 +32,16 @@ class SlovenskaPostaEndpoint extends Endpoint
 
     /**
      * @param array $events
-     * @return array
+     * @return array|null
      */
-    protected function parseEvents($events): array
+    protected function parseEvents(?array $events): array
     {
         $states = [];
-        foreach ($events as $event) {
-            $state = $this->parseEvent($event);
-            $states[] = $state;
+        if (isset($events)) {
+            foreach ($events as $event) {
+                $state = $this->parseEvent($event);
+                $states[] = $state;
+            }
         }
 
         return $states;
