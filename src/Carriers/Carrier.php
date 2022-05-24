@@ -20,8 +20,14 @@ class Carrier implements CarrierInterface
 
     protected const REGEX = null;
 
-    /** @var \MartinusDev\ShipmentsTracking\Endpoints\Endpoint */
+    /**
+     * @var \MartinusDev\ShipmentsTracking\Endpoints\Endpoint
+     */
     protected $endPoint;
+    /**
+     * @var bool
+     */
+    private $liveRequests;
 
     /**
      * @param string $carrierName
@@ -55,7 +61,11 @@ class Carrier implements CarrierInterface
      */
     public function __construct(array $options = [])
     {
-        $options += [];
+        $options += [
+            'liveRequests' => true,
+        ];
+
+        $this->liveRequests = $options['liveRequests'];
 
         if ($this->endPointClass) {
             $this->endPoint = new $this->endPointClass($options);
@@ -110,7 +120,7 @@ class Carrier implements CarrierInterface
             'number' => $number,
             'carrier' => $this,
             'trackingLink' => $this->getTrackingUrl($number),
-        ]);
+        ], $options);
 
         return $shipment;
     }

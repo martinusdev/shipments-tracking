@@ -1,20 +1,28 @@
 <?php
+declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Shipment;
 
 use JsonSerializable;
-use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 
 class Shipment implements JsonSerializable
 {
-    /** @var \MartinusDev\ShipmentsTracking\Carriers\CarrierInterface */
+    /**
+     * @var \MartinusDev\ShipmentsTracking\Carriers\CarrierInterface
+     */
     public $carrier;
     public $carrierName;
-    /** @var string */
+    /**
+     * @var string
+     */
     public $number = '';
-    /** @var string */
+    /**
+     * @var string
+     */
     public $trackingLink;
-    /** @var State[] */
+    /**
+     * @var \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
+     */
     public $states;
 
     /**
@@ -22,7 +30,7 @@ class Shipment implements JsonSerializable
      *
      * @param array $data
      */
-    public function __construct($data)
+    public function __construct(array $data, array $options = [])
     {
         $data += [
             'number' => null,
@@ -31,12 +39,18 @@ class Shipment implements JsonSerializable
             'trackingLink' => null,
         ];
 
+        $options += [
+            'loadStates' => true,
+        ];
+
         $this->number = $data['number'];
         $this->carrierName = $data['carrierName'];
         $this->carrier = $data['carrier'];
         $this->trackingLink = $data['trackingLink'];
 
-        $this->states = $this->carrier->getStates($this);
+        if ($options['loadStates']) {
+            $this->loadStates();
+        }
     }
 
     public function __toString()
@@ -83,5 +97,13 @@ class Shipment implements JsonSerializable
     public function getTrackingLink(): string
     {
         return $this->trackingLink;
+    }
+
+    /**
+     * @return void
+     */
+    public function loadStates(): void
+    {
+        $this->states = $this->carrier->getStates($this);
     }
 }
