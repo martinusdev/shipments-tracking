@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Carriers;
 
@@ -7,37 +6,36 @@ use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 
 class Carrier implements CarrierInterface
 {
-    public const NAME = '';
 
-    /** @var string[] */
-    public const CARRIERS = [
+    const NAME = '';
+
+    const CARRIERS = [
         SlovenskaPostaCarrier::NAME,
     ];
 
-    /**
-     * @var string
-     */
+    protected $regex;
+    protected $method;
     protected $url;
-    /**
-     * @var string|\MartinusDev\ShipmentsTracking\Endpoints\Endpoint
-     */
     protected $endPointClass;
 
     protected const REGEX = null;
 
     /**
-     * @var \MartinusDev\ShipmentsTracking\Endpoints\Endpoint|null
+     * @var \MartinusDev\ShipmentsTracking\Endpoints\Endpoint
      */
-    protected $endPoint = null;
+    protected $endPoint;
+    /**
+     * @var bool
+     */
+    private $liveRequests;
 
     /**
      * @param string $carrierName
-     * @param array<string,mixed> $options
+     * @param array $options
      * @return \MartinusDev\ShipmentsTracking\Carriers\Carrier
      */
-    public static function load(string $carrierName, array $options = []): Carrier
+    public static function load($carrierName, array $options = []): Carrier
     {
-        /** @var \MartinusDev\ShipmentsTracking\Carriers\Carrier $className */
         $className = self::getNamespaceName($carrierName);
 
         return new $className($options);
@@ -47,7 +45,7 @@ class Carrier implements CarrierInterface
      * @param string $carrierName
      * @return string
      */
-    public static function getNamespaceName(string $carrierName): string
+    public static function getNamespaceName($carrierName): string
     {
         if (!in_array($carrierName, self::CARRIERS)) {
             throw new \RuntimeException('Carrier ' . $carrierName . ' does not exists');
@@ -59,11 +57,15 @@ class Carrier implements CarrierInterface
     /**
      * Carrier constructor.
      *
-     * @param array<string, mixed> $options
+     * @param array $options
      */
     public function __construct(array $options = [])
     {
-        $options += [];
+        $options += [
+            'liveRequests' => true,
+        ];
+
+        $this->liveRequests = $options['liveRequests'];
 
         if ($this->endPointClass) {
             $this->endPoint = new $this->endPointClass($options);
@@ -85,6 +87,14 @@ class Carrier implements CarrierInterface
     }
 
     /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return static::NAME;
+    }
+
+    /**
      * @param string $number
      * @return string
      */
@@ -100,24 +110,24 @@ class Carrier implements CarrierInterface
 
     /**
      * @param string $number
-     * @param array<string,mixed> $options
+     * @param array $options
      * @return \MartinusDev\ShipmentsTracking\Shipment\Shipment
      */
     public function getShipment(string $number, array $options = []): Shipment
     {
         $shipment = new Shipment([
-            'carrierName' => static::NAME,
+            'carrierName' => $this->getName(),
             'number' => $number,
             'carrier' => $this,
             'trackingLink' => $this->getTrackingUrl($number),
-        ]);
+        ], $options);
 
         return $shipment;
     }
 
     /**
      * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment
-     * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
+     * @return array
      */
     public function getStates(Shipment $shipment): array
     {

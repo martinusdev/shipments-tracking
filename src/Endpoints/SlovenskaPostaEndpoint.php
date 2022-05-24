@@ -23,17 +23,24 @@ class SlovenskaPostaEndpoint extends Endpoint
     public function parseResponse(string $responseString): array
     {
         $response = json_decode($responseString, true);
+        if (!isset($response['parcels'])) {
+            throw new \Exception('Unknown response: ' . json_encode($response));
+        }
+        if ($response['parcels'] === []) {
+            return [];
+        }
         $tracking = $response['parcels'][0];
-        $events = $tracking['events'];
-
-        return $this->parseEvents($events);
+        if (isset($tracking['events']) && is_array($tracking['events'])) {
+            return $this->parseEvents($tracking['events']);
+        }
+        return [];
     }
 
     /**
      * @param array $events
      * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
      */
-    protected function parseEvents($events): array
+    protected function parseEvents(array $events): array
     {
         $states = [];
         foreach ($events as $event) {
