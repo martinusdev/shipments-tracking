@@ -19,6 +19,9 @@ interface CarrierInterface
      */
     public function checkNumber(string $number): bool;
 
+    /**
+     * @return string
+     */
     public function getName(): string;
 
     /**
