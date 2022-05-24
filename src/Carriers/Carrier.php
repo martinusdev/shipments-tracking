@@ -81,7 +81,7 @@ class Carrier implements CarrierInterface
      */
     public function getName(): string
     {
-        return self::NAME;
+        return static::NAME;
     }
 
     /**
