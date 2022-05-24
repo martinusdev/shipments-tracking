@@ -17,7 +17,12 @@ interface CarrierInterface
      * @param string $number
      * @return bool
      */
-    public function checkNumber(string $number):bool;
+    public function checkNumber(string $number): bool;
+
+    /**
+     * @return string
+     */
+    public function getName(): string;
 
     /**
      * @param string $number
