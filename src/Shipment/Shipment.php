@@ -91,6 +91,9 @@ class Shipment implements JsonSerializable
         return $this->trackingLink;
     }
 
+    /**
+     * @return void
+     */
     public function loadStates(): void
     {
         $this->states = $this->carrier->getStates($this);
