@@ -22,7 +22,7 @@ class Shipment implements JsonSerializable
      *
      * @param array $data
      */
-    public function __construct($data)
+    public function __construct(array $data, array $options = [])
     {
         $data += [
             'number' => null,
@@ -31,12 +31,18 @@ class Shipment implements JsonSerializable
             'trackingLink' => null,
         ];
 
+        $options += [
+            'loadStates' => true,
+        ];
+
         $this->number = $data['number'];
         $this->carrierName = $data['carrierName'];
         $this->carrier = $data['carrier'];
         $this->trackingLink = $data['trackingLink'];
 
-        $this->states = $this->carrier->getStates($this);
+        if ($options['loadStates']) {
+            $this->loadStates();
+        }
     }
 
     public function __toString()
@@ -83,5 +89,10 @@ class Shipment implements JsonSerializable
     public function getTrackingLink(): string
     {
         return $this->trackingLink;
+    }
+
+    public function loadStates(): void
+    {
+        $this->states = $this->carrier->getStates($this);
     }
 }
