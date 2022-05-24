@@ -14,7 +14,7 @@ use RuntimeException;
 
 class SlovenskaPostaEndpoint extends Endpoint
 {
-    public $url = 'https://api.posta.sk/private/search?m=tnt&q=$1';
+    public $url = 'https://api.posta.sk/tracking?q=$1';
 
     /**
      * @param string $responseString
