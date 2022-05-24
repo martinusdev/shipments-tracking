@@ -76,6 +76,9 @@ class Carrier implements CarrierInterface
         return (bool)preg_match(static::REGEX, $number);
     }
 
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         return self::NAME;
