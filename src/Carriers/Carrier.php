@@ -76,6 +76,11 @@ class Carrier implements CarrierInterface
         return (bool)preg_match(static::REGEX, $number);
     }
 
+    public function getName(): string
+    {
+        return self::NAME;
+    }
+
     /**
      * @param string $number
      * @return string
@@ -98,7 +103,7 @@ class Carrier implements CarrierInterface
     public function getShipment(string $number, array $options = []): Shipment
     {
         $shipment = new Shipment([
-            'carrierName' => static::NAME,
+            'carrierName' => $this->getName(),
             'number' => $number,
             'carrier' => $this,
             'trackingLink' => $this->getTrackingUrl($number),
