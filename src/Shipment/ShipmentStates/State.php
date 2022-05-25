@@ -12,15 +12,27 @@ use JsonSerializable;
 
 abstract class State implements JsonSerializable
 {
+    /**
+     * @var string
+     */
     protected $name;
-    /** @var \Cake\Chronos\Chronos */
+    /**
+     * @var \Cake\Chronos\Chronos
+     */
     public $date;
-    /** @var string */
+    /**
+     * @var string
+     */
     public $description;
-    /** @var array */
+    /**
+     * @var string[]
+     */
     public $original;
 
-    public function __construct($data = [])
+    /**
+     * @param array<string, (array<string>|string|\Cake\Chronos\Chronos)> $data
+     */
+    public function __construct(array $data = [])
     {
         $data += [
             'date' => null,

@@ -18,9 +18,9 @@ class SlovenskaPostaEndpoint extends Endpoint
 
     /**
      * @param string $responseString
-     * @return array
+     * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
      */
-    public function parseResponse($responseString): array
+    public function parseResponse(string $responseString): array
     {
         $response = json_decode($responseString, true);
         if (!isset($response['results'])) {
@@ -38,7 +38,7 @@ class SlovenskaPostaEndpoint extends Endpoint
 
     /**
      * @param array $events
-     * @return array
+     * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
      */
     protected function parseEvents(array $events): array
     {

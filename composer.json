@@ -15,7 +15,8 @@
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.0",
     "cakephp/cakephp-codesniffer": "^3.0",
-    "phpunit/phpunit": "^5.7.14|^6.0"
+    "phpunit/phpunit": "^5.7.14|^6.0",
+    "phpstan/phpstan": "~1.4"
   },
   "autoload": {
     "psr-4": {
@@ -37,7 +38,8 @@
     ],
     "cs-check": "phpcs --colors --parallel=16 -p src/ tests/",
     "cs-fix": "phpcbf --colors --parallel=16 -p src/ tests/",
-    "test": "phpunit",
-    "test-coverage": "phpunit --coverage-clover=clover.xml"
+    "test": "phpunit --no-coverage",
+    "test-coverage": "phpunit --coverage-clover=clover.xml",
+    "phpstan": "composer require guzzlehttp/guzzle && phpstan analyse -l 5 src/"
   }
 }

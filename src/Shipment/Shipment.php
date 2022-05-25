@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MartinusDev\ShipmentsTracking\Shipment;
 
 use JsonSerializable;
+use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 
 class Shipment implements JsonSerializable
 {
@@ -11,6 +12,9 @@ class Shipment implements JsonSerializable
      * @var \MartinusDev\ShipmentsTracking\Carriers\CarrierInterface
      */
     public $carrier;
+    /**
+     * @var string|null
+     */
     public $carrierName;
     /**
      * @var string
@@ -28,7 +32,7 @@ class Shipment implements JsonSerializable
     /**
      * Shipment constructor.
      *
-     * @param array $data
+     * @param array<string,mixed> $data
      */
     public function __construct(array $data, array $options = [])
     {
@@ -82,9 +86,9 @@ class Shipment implements JsonSerializable
     }
 
     /**
-     * @return State|null
+     * @return ?\MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State
      */
-    public function getLastState()
+    public function getLastState(): ?State
     {
         $state = end($this->states);
         if ($state === false) {
