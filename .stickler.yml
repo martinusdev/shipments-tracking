@@ -2,10 +2,13 @@
 linters:
   phpcs:
     standard: CakePHP
-    exclude: 'CakePHP.Commenting.FunctionComment.Missing'
+    #exclude: 'CakePHP.Commenting.FunctionComment.MissingParamComment,CakePHP.Commenting.FunctionComment.Missing'
     extensions: 'php,ctp'
     fixer: true
 
 fixers:
   enable: true
   workflow: commit
+
+review:
+  fail_on_comments: false
