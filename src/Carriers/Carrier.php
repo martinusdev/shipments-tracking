@@ -21,7 +21,7 @@ class Carrier implements CarrierInterface
     protected const REGEX = null;
 
     /**
-     * @var \MartinusDev\ShipmentsTracking\Endpoints\Endpoint
+     * @var ?\MartinusDev\ShipmentsTracking\Endpoints\Endpoint
      */
     protected $endPoint;
 
