@@ -24,10 +24,6 @@ class Carrier implements CarrierInterface
      * @var \MartinusDev\ShipmentsTracking\Endpoints\Endpoint
      */
     protected $endPoint;
-    /**
-     * @var bool
-     */
-    private $liveRequests;
 
     /**
      * @param string $carrierName
@@ -61,12 +57,6 @@ class Carrier implements CarrierInterface
      */
     public function __construct(array $options = [])
     {
-        $options += [
-            'liveRequests' => true,
-        ];
-
-        $this->liveRequests = $options['liveRequests'];
-
         if ($this->endPointClass) {
             $this->endPoint = new $this->endPointClass($options);
         }
