@@ -9,3 +9,6 @@ linters:
 fixers:
   enable: true
   workflow: commit
+
+review:
+  fail_on_comments: false
