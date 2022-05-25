@@ -23,13 +23,13 @@ class SlovenskaPostaEndpoint extends Endpoint
     public function parseResponse($responseString): array
     {
         $response = json_decode($responseString, true);
-        if (!isset($response['parcels'])) {
+        if (!isset($response['results'])) {
             throw new \Exception('Unknown response: ' . json_encode($response));
         }
-        if ($response['parcels'] === []) {
+        if ($response['results'] === []) {
             return [];
         }
-        $tracking = $response['parcels'][0];
+        $tracking = $response['results'][0];
         if (isset($tracking['events']) && is_array($tracking['events'])) {
             return $this->parseEvents($tracking['events']);
         }
@@ -58,22 +58,15 @@ class SlovenskaPostaEndpoint extends Endpoint
     public function parseEvent($event): State
     {
         $event += [
-            'state' => null,
-            'post' => [
-                'name' => null,
-            ],
+            'stateCode' => null,
         ];
-        $return = [
-            'date' => null,
-            'description' => null,
-            'original' => [],
-        ];
-        $return['date'] = Chronos::createFromDate($event['date'][0], $event['date'][1], $event['date'][2], 'Europe/Bratislava')->setTime($event['date'][3], $event['date'][4], $event['date'][5])->setTimezone('UTC');
+        $return = [];
+        $return['date'] = Chronos::parse($event['localDate'], 'Europe/Bratislava')->setTimezone('UTC');
 
-        $return['description'] = preg_replace('/{post}/', $event['post']['name'], $event['desc']['en']);
+        $return['description'] = $event['detailDescription'];
         $return['original'] = $event;
 
-        $stateClass = $this->getStateClass($event['state']);
+        $stateClass = $this->getStateClass($event['stateCode']);
 
         return new $stateClass($return);
     }
