@@ -40,7 +40,7 @@ class SlovenskaPostaCarrierTest extends TestCase
 
     public function testGet()
     {
-        $testClient = new TestHttpClient(file_get_contents(COMPARISIONS . '/Carriers/SlovenskaPosta/get_1.json'), 'https://api.posta.sk/private/search?m=tnt&q=ZB079400232SK');
+        $testClient = new TestHttpClient(file_get_contents(COMPARISIONS . '/Endpoints/SlovenskaPosta/response_1.json'), 'https://api.posta.sk/tracking?q=ZB079400232SK');
         new ShipmentsTracking(['client' => $testClient]);
         $carrier = Carrier::load(SlovenskaPostaCarrier::NAME);
         $shipment = $carrier->getShipment('ZB079400232SK');
