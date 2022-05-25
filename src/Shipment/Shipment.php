@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MartinusDev\ShipmentsTracking\Shipment;
 
 use JsonSerializable;
+use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 
 class Shipment implements JsonSerializable
 {
