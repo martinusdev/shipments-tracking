@@ -62,7 +62,7 @@ jobs:
 
       - name: Run PHPUnit
         run: |
-          phpunit --coverage-clover=coverage.xml
+          vendor/bin/phpunit --coverage-clover=coverage.xml
 
       - name: Submit code coverage
         uses: codecov/codecov-action@v2
