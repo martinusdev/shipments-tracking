@@ -20,7 +20,7 @@ class SlovenskaPostaEndpointTest extends TestCase
         $deliveredState = $parsed[2];
         $this->assertInstanceOf(State::class, $deliveredState);
         $this->assertSame('delivered', (string)$deliveredState);
-        $this->assertSame('Item delivered to the Addressee at the post office Bratislava 1', $deliveredState->description);
+        $this->assertSame('Zásielka uložená na pošte {post}', $deliveredState->description);
     }
 
     /**
@@ -32,17 +32,8 @@ class SlovenskaPostaEndpointTest extends TestCase
     {
         $endpoint = new SlovenskaPostaEndpoint();
         $event += [
-            'date' => [
-                2019, 3, 16, 22, 18, 19,
-            ],
-            'desc' => [
-                'sk' => 'Test state ' . $stateName,
-                'en' => 'Test state ' . $stateName,
-            ],
-            'post' => [
-                'id' => 1,
-                'name' => 'Bratislava',
-            ],
+            'localDate' => '2019-03-16T22:18:19',
+            'detailDescription' => 'Test state ' . $stateName,
         ];
         $state = $endpoint->parseEvent($event);
         $this->assertSame($stateName, (string)$state);
@@ -54,25 +45,25 @@ class SlovenskaPostaEndpointTest extends TestCase
         return [
             [
                 [
-                    'state' => 'any_other',
+                    'stateCode' => 'any_other',
                 ],
                 'unknown',
             ],
             [
                 [
-                    'state' => 'notified',
+                    'stateCode' => 'notified',
                 ],
                 'notified',
             ],
             [
                 [
-                    'state' => 'delivered',
+                    'stateCode' => 'delivered',
                 ],
                 'delivered',
             ],
             [
                 [
-                    'state' => 'returned',
+                    'stateCode' => 'returned',
                 ],
                 'returned',
             ],
