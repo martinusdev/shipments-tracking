@@ -11,6 +11,8 @@ class Carrier implements CarrierInterface
 
     const CARRIERS = [
         SlovenskaPostaCarrier::NAME,
+        GlsSkCarrier::NAME,
+        GlsCzCarrier::NAME,
     ];
 
     protected $regex;
