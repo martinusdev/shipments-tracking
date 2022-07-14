@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Test\TestCase\Endpoints;
 
@@ -9,7 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class GLSEndpointTest extends TestCase
 {
-
     public function testUnknownParcelNumber()
     {
         $endpoint = new GlsSkEndpoint();
