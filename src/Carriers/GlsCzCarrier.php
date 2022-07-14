@@ -8,6 +8,8 @@ class GlsCzCarrier extends Carrier
 {
     public const NAME = 'GlsCz';
 
+    public const REGEX = '/^(90[0-9]{9})$/i';
+
     protected $endPointClass = GlsCzEndpoint::class;
 
     /**
