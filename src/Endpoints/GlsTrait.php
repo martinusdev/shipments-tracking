@@ -52,7 +52,7 @@ trait GlsTrait
         $return['description'] = $event['StInfo'];
         $return['original'] = $event;
 
-        $stateClass = $this->getStateClass($event['StCode']);
+        $stateClass = $this->getStateClass((int)$event['StCode']);
 
         return new $stateClass($return);
     }
