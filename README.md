@@ -7,3 +7,4 @@
 Tracking slovenských a českých prepravcov.
 
 * Slovenská Pošta
+* GLS SK & CZ

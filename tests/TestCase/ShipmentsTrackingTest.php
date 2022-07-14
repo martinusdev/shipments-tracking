@@ -44,6 +44,10 @@ class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase
     {
         return [
             ['RR079400152SK', 'SlovenskaPosta'],
+            ['91090914000', 'GlsSk'],
+            ['91110081000', 'GlsSk'],
+            ['00104001000', 'GlsSk'],
+            ['90333227133', 'GlsCz'],
         ];
     }
 
