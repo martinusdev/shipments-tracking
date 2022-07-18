@@ -20,5 +20,5 @@ class GlsCzCarrier extends Carrier
     /**
      * @var string
      */
-    protected $url = 'https://online.gls-czech.com/tt_page.php?tt_value=$1';
+    protected $url = 'https://gls-group.eu/CZ/cs/sledovani-zasilek?match=$1';
 }

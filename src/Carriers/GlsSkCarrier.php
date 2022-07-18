@@ -20,5 +20,5 @@ class GlsSkCarrier extends Carrier
     /**
      * @var string
      */
-    protected $url = 'https://online.gls-slovakia.sk/tt_page.php?tt_value=$1';
+    protected $url = 'https://gls-group.eu/SK/sk/sledovanie-zasielok?match=$1';
 }
