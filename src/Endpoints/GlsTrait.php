@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace MartinusDev\ShipmentsTracking\Endpoints;
 
 use Cake\Chronos\Chronos;
-use Exception;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\DeliveredState;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\NotifiedState;
@@ -18,8 +17,8 @@ trait GlsTrait
 {
     /**
      * @param string $responseString
-     * @return State[]
-     * @throws Exception
+     * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
+     * @throws \Exception
      */
     public function parseResponse(string $responseString): array
     {
