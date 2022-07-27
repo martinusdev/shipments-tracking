@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MartinusDev\ShipmentsTracking\Endpoints;
 
 use Cake\Chronos\Chronos;
+use Exception;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\DeliveredState;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\NotifiedState;
@@ -17,17 +18,12 @@ trait GlsTrait
 {
     /**
      * @param string $responseString
-     * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
-     * @throws \Exception
+     * @return State[]
+     * @throws Exception
      */
     public function parseResponse(string $responseString): array
     {
-        try {
-            $response = simplexml_load_string($responseString);
-        } catch (\Exception $e) {
-            throw new \Exception('Unknown response: ' . $responseString);
-        }
-
+        $response = new \SimpleXMLElement($responseString);
         $events = [];
         foreach ($response->Parcel->Statuses->Status as $status) {
             $attributes = [];
