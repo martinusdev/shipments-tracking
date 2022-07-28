@@ -22,12 +22,7 @@ trait GlsTrait
      */
     public function parseResponse(string $responseString): array
     {
-        try {
-            $response = simplexml_load_string($responseString);
-        } catch (\Exception $e) {
-            throw new \Exception('Unknown response: ' . $responseString);
-        }
-
+        $response = new \SimpleXMLElement($responseString);
         $events = [];
         foreach ($response->Parcel->Statuses->Status as $status) {
             $attributes = [];

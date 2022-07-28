@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class GLSEndpointTest extends TestCase
 {
-    public function testUnknownParcelNumber()
+    public function testUnknownParcelNumber(): void
     {
         $endpoint = new GlsSkEndpoint();
         $this->expectException(Exception::class);
@@ -18,7 +18,7 @@ class GLSEndpointTest extends TestCase
         $this->assertNull($response);
     }
 
-    public function testParseResponse()
+    public function testParseResponse(): void
     {
         $response = file_get_contents(COMPARISIONS . '/Endpoints/GLS/GLS_SK.xml');
         $endpoint = new GlsSkEndpoint();
@@ -37,7 +37,7 @@ class GLSEndpointTest extends TestCase
      * @param string $stateName
      * @dataProvider parseEvent()
      */
-    public function testParseEvent($event, $stateName)
+    public function testParseEvent(array $event, string $stateName): void
     {
         $endpoint = new GlsSkEndpoint();
         $event += [
@@ -49,7 +49,7 @@ class GLSEndpointTest extends TestCase
         $this->assertSame('Test state ' . $stateName, $state->description);
     }
 
-    public function parseEvent()
+    public function parseEvent(): array
     {
         return [
             [
