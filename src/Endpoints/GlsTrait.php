@@ -22,6 +22,10 @@ trait GlsTrait
      */
     public function parseResponse(string $responseString): array
     {
+        if ($responseString === 'Err#02: Parcel number(s) not found in database') {
+            return [];
+        }
+
         $response = new \SimpleXMLElement($responseString);
         $events = [];
         foreach ($response->Parcel->Statuses->Status as $status) {

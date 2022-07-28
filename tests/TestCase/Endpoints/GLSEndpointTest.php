@@ -13,9 +13,8 @@ class GLSEndpointTest extends TestCase
     public function testUnknownParcelNumber(): void
     {
         $endpoint = new GlsSkEndpoint();
-        $this->expectException(Exception::class);
         $response = $endpoint->parseResponse('Err#02: Parcel number(s) not found in database');
-        $this->assertNull($response);
+        $this->assertSame([], $response);
     }
 
     public function testParseResponse(): void
