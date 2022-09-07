@@ -9,27 +9,41 @@ use MartinusDev\ShipmentsTracking\Endpoints\SPSEndpoint;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 use MartinusDev\ShipmentsTracking\ShipmentsTracking;
+use MartinusDev\ShipmentsTracking\Test\TestSuite\TestHttpClient;
 use PHPUnit\Framework\TestCase;
+use SoapClient;
 
 class SPSEndpointTest extends TestCase
 {
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|SoapClient
+     */
+    private $soapClientMock;
+
     protected function setUp()
     {
-        //  $testClient = new TestHttpClient(file_get_contents(COMPARISIONS . '/Endpoints/GLS/GLS_SK.xml'), 'https://online.gls-slovakia.sk/tt_page_xml.php?pclid=809558682');
-        //  new ShipmentsTracking(['client' => $testClient]);
-        new ShipmentsTracking();
+        $this->soapClientMock = $this->getMockFromWsdl('https://t-t.sps-sro.sk/service_soap.php?wsdl');
+
+        $testClient = new TestHttpClient();
+        new ShipmentsTracking(['client' => $testClient]);
 
         parent::setUp();
     }
 
     public function testGetStates(): void
     {
-        $this->markTestSkipped('live request');
         $spsCarrier = new SPSCarrier();
         $endpoint = new SPSEndpoint();
+
+        $this->soapClientMock
+            ->method('getParcelStatus')
+            ->with(703, 30, 28751102, 'E')
+            ->willReturn($this->correctResponse());
+
+        $endpoint->setClient($this->soapClientMock);
         $shipment = new Shipment([
             'carrierName' => SPSCarrier::NAME,
-            'number' => '703-030-28751101',
+            'number' => '703-030-28751102',
             'carrier' => $spsCarrier,
             // 'trackingLink' => $this->getTrackingUrl($number),
         ]);
@@ -43,6 +57,7 @@ class SPSEndpointTest extends TestCase
         $this->markTestSkipped('todo');
         $response = file_get_contents(COMPARISIONS . '/Endpoints/SPS/SPS.xml');
         $endpoint = new SPSEndpoint();
+
         $parsed = $endpoint->parseResponse($response);
 
         $this->assertCount(5, $parsed);
@@ -84,6 +99,19 @@ class SPSEndpointTest extends TestCase
                 ],
                 'unknown',
             ],
+        ];
+    }
+
+    /**
+     * @return ParcelStatus[]
+     */
+    private function correctResponse(): array
+    {
+        $status1 = new ParcelStatus(0, '', '', 'Inbound', 10, '', '', '', '');
+        $status2 = new ParcelStatus(0, '', '', 'Registration', 44, '', '', '', '');
+        return [
+            $status1,
+            $status2
         ];
     }
 }

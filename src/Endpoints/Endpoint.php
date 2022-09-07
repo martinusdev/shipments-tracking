@@ -7,13 +7,6 @@ use MartinusDev\ShipmentsTracking\ShipmentsTracking;
 
 abstract class Endpoint
 {
-    /** @var \MartinusDev\ShipmentsTracking\HttpClient\HttpClientInterface */
-    protected $client;
-
-    public function __construct()
-    {
-    }
-
     /**
      * @param string $responseString
      * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]

@@ -5,7 +5,8 @@ namespace MartinusDev\ShipmentsTracking\Endpoints;
 
 use Cake\Chronos\Chronos;
 use MartinusDev\ShipmentsTracking\Endpoints\SPS\ParcelStatus;
-use MartinusDev\ShipmentsTracking\Endpoints\SPS\SpsSoapClient;
+use MartinusDev\ShipmentsTracking\Endpoints\SPS\SPSParcelNumber;
+use MartinusDev\ShipmentsTracking\Endpoints\SPS\SPSSoapClient;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\ReceivedState;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
@@ -17,7 +18,21 @@ class SPSEndpoint extends Endpoint
     /**
      * @var \MartinusDev\ShipmentsTracking\Endpoints\SPS\ParcelStatus[]
      */
-    private $statuses;
+    private $statuses = [];
+    /**
+     * @var SPSSoapClient
+     */
+    private $client;
+
+    public function __construct()
+    {
+        $this->client = new SPSSoapClient();
+    }
+
+    public function setClient(\SoapClient $client): void
+    {
+        $this->client = $client;
+    }
 
     /**
      * @param string $responseString
@@ -74,8 +89,8 @@ class SPSEndpoint extends Endpoint
      */
     public function getStates(Shipment $shipment)
     {
-        $client = new SpsSoapClient();
-        $this->statuses = $client->getParcelStatus(703, 30, 28751101, 'E');
+        $SPSParcelNumber = new SPSParcelNumber($shipment->number);
+        $this->statuses = $this->client->getParcelStatus((int)$SPSParcelNumber->landNr, (int)$SPSParcelNumber->manNr, (int)$SPSParcelNumber->lfdNr, 'E');
 
         return $this->parseResponse('');
     }

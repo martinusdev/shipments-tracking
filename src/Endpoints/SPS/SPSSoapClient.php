@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Endpoints\SPS;
 
-class SpsSoapClient extends \SoapClient
+class SPSSoapClient extends \SoapClient
 {
     /**
      * @var array $classmap The defined classes
