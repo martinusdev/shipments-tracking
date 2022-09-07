@@ -10,6 +10,11 @@ use MartinusDev\ShipmentsTracking\Test\TestSuite\TestHttpClient;
 
 class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase
 {
+    protected function setUp()
+    {
+
+        parent::setUp();
+    }
 
     public function testConstruct()
     {
@@ -27,7 +32,8 @@ class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase
     {
         $carrier = Carrier::load($carrierName);
         $testClient = new TestHttpClient();
-        $shipmentsTracking = new ShipmentsTracking(['client' => $testClient]);;
+        $shipmentsTracking = new ShipmentsTracking(['client' => $testClient]);
+
         $detectedCarried = $shipmentsTracking->detectCarrier($number);
 
         $this->assertEquals($carrierName, $detectedCarried->getName());
