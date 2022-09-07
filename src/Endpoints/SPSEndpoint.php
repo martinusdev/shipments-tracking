@@ -15,7 +15,7 @@ use RuntimeException;
 class SPSEndpoint extends Endpoint
 {
     /**
-     * @var ParcelStatus[]
+     * @var \MartinusDev\ShipmentsTracking\Endpoints\SPS\ParcelStatus[]
      */
     private $statuses;
 

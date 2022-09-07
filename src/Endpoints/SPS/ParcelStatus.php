@@ -1,11 +1,10 @@
 <?php
-
+declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Endpoints\SPS;
 
 class ParcelStatus
 {
-
     /**
      * @var string $ParcelNumber
      */
