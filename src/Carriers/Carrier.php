@@ -13,6 +13,7 @@ class Carrier implements CarrierInterface
         SlovenskaPostaCarrier::NAME,
         GlsSkCarrier::NAME,
         GlsCzCarrier::NAME,
+        SPSCarrier::NAME,
     ];
 
     protected $regex;

@@ -8,3 +8,4 @@ Tracking slovenských a českých prepravcov.
 
 * Slovenská Pošta
 * GLS SK & CZ
+* SPS - Slovak Parcel Service a ParcelShop-y

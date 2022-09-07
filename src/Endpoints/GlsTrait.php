@@ -16,17 +16,17 @@ use RuntimeException;
 trait GlsTrait
 {
     /**
-     * @param string $responseString
+     * @param string $statuses
      * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
      * @throws \Exception
      */
-    public function parseResponse(string $responseString): array
+    public function parseResponse(string $statuses): array
     {
-        if ($responseString === 'Err#02: Parcel number(s) not found in database') {
+        if ($statuses === 'Err#02: Parcel number(s) not found in database') {
             return [];
         }
 
-        $response = new \SimpleXMLElement($responseString);
+        $response = new \SimpleXMLElement($statuses);
         $events = [];
         foreach ($response->Parcel->Statuses->Status as $status) {
             $attributes = [];

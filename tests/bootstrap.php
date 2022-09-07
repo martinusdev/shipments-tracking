@@ -15,3 +15,10 @@ function pr($var)
 
     return $var;
 }
+
+
+function dd($var)
+{
+    pr($var);
+    die();
+}

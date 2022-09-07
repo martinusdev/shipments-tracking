@@ -3,7 +3,6 @@
 namespace MartinusDev\ShipmentsTracking\Endpoints;
 
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
-use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 use MartinusDev\ShipmentsTracking\ShipmentsTracking;
 
 abstract class Endpoint
@@ -16,10 +15,10 @@ abstract class Endpoint
     }
 
     /**
-     * @param string $responseString
+     * @param string $statuses
      * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
      */
-    abstract public function parseResponse(string $responseString): array;
+    abstract public function parseResponse(string $statuses): array;
 
     /**
      * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment
@@ -28,9 +27,9 @@ abstract class Endpoint
     public function getStates(Shipment $shipment)
     {
         $trackingUrl = $this->getUrl($shipment);
-        $response = $this->fetchResponse($trackingUrl);
+        $this->statuses = $this->fetchResponse($trackingUrl);
 
-        return $this->parseResponse($response);
+        return $this->parseResponse('');
     }
 
     public function fetchResponse(string $uri): string
