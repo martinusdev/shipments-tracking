@@ -21,7 +21,7 @@ class SPSEndpoint extends Endpoint
 
     /**
      * @param string $responseString
-     * @return State[]
+     * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
      */
     public function parseResponse(string $responseString): array
     {
