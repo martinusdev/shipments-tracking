@@ -12,7 +12,6 @@ use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\ReceivedState;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\UnknownState;
 use RuntimeException;
-use SoapClient;
 
 class SPSEndpoint extends Endpoint
 {
@@ -21,7 +20,7 @@ class SPSEndpoint extends Endpoint
      */
     private $statuses = [];
     /**
-     * @var SoapClient
+     * @var \SoapClient
      */
     private $client;
 
