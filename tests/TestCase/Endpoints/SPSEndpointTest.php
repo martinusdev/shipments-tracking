@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Test\TestCase\Endpoints;
 
@@ -12,7 +13,6 @@ use PHPUnit\Framework\TestCase;
 
 class SPSEndpointTest extends TestCase
 {
-
     protected function setUp()
     {
         //  $testClient = new TestHttpClient(file_get_contents(COMPARISIONS . '/Endpoints/GLS/GLS_SK.xml'), 'https://online.gls-slovakia.sk/tt_page_xml.php?pclid=809558682');
