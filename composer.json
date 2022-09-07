@@ -11,9 +11,7 @@
     "ext-json": "*",
     "ext-simplexml": "*",
 
-    "cakephp/chronos": "^1.2|^2.0",
-    "wsdl2phpgenerator/wsdl2phpgenerator": "^3.4",
-    "guzzlehttp/guzzle": "^7.5"
+    "cakephp/chronos": "^1.2|^2.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.0",
