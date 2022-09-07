@@ -6,9 +6,17 @@ use MartinusDev\ShipmentsTracking\Carriers\Carrier;
 use MartinusDev\ShipmentsTracking\Carriers\UnknownCarrier;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\ShipmentsTracking;
+use MartinusDev\ShipmentsTracking\Test\TestSuite\TestHttpClient;
 
 class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase
 {
+    protected function setUp()
+    {
+
+
+        parent::setUp();
+    }
+
     public function testConstruct()
     {
         $shipmentsTracking = new ShipmentsTracking();
@@ -24,10 +32,11 @@ class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase
     public function testDetectCarrier($number, $carrierName)
     {
         $carrier = Carrier::load($carrierName);
-
-        $shipmentsTracking = new ShipmentsTracking();
+        $testClient = new TestHttpClient();
+        $shipmentsTracking = new ShipmentsTracking(['client' => $testClient]);;
         $detectedCarried = $shipmentsTracking->detectCarrier($number);
-        $this->assertEquals($carrier, $detectedCarried);
+
+        $this->assertEquals($carrierName, $detectedCarried->getName());
     }
 
     /**
