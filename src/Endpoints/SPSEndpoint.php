@@ -20,7 +20,7 @@ class SPSEndpoint extends Endpoint
      */
     private $statuses = [];
     /**
-     * @var SPSSoapClient
+     * @var \MartinusDev\ShipmentsTracking\Endpoints\SPS\SPSSoapClient
      */
     private $client;
 

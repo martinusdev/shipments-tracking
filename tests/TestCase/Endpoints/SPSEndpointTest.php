@@ -11,7 +11,6 @@ use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 use MartinusDev\ShipmentsTracking\ShipmentsTracking;
 use MartinusDev\ShipmentsTracking\Test\TestSuite\TestHttpClient;
 use PHPUnit\Framework\TestCase;
-use SoapClient;
 
 class SPSEndpointTest extends TestCase
 {
@@ -109,9 +108,10 @@ class SPSEndpointTest extends TestCase
     {
         $status1 = new ParcelStatus(0, '', '', 'Inbound', 10, '', '', '', '');
         $status2 = new ParcelStatus(0, '', '', 'Registration', 44, '', '', '', '');
+
         return [
             $status1,
-            $status2
+            $status2,
         ];
     }
 }

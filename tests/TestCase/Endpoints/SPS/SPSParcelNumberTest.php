@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Test\TestCase\Endpoints\SPS;
 
@@ -19,7 +20,6 @@ class SPSParcelNumberTest extends TestCase
         $this->assertSame('010', $SPSParcelNumber->manNr);
         $this->assertSame('28751101', $SPSParcelNumber->lfdNr);
     }
-
 
     public function ValidNumbersProvider()
     {
