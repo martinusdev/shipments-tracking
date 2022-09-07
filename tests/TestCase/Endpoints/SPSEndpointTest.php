@@ -24,6 +24,7 @@ class SPSEndpointTest extends TestCase
 
     public function testGetStates(): void
     {
+        $this->markTestSkipped('live request');
         $spsCarrier = new SPSCarrier();
         $endpoint = new SPSEndpoint();
         $shipment = new Shipment([
