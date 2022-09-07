@@ -15,10 +15,10 @@ abstract class Endpoint
     }
 
     /**
-     * @param string $statuses
+     * @param string $responseString
      * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
      */
-    abstract public function parseResponse(string $statuses): array;
+    abstract public function parseResponse(string $responseString): array;
 
     /**
      * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment
@@ -27,9 +27,9 @@ abstract class Endpoint
     public function getStates(Shipment $shipment)
     {
         $trackingUrl = $this->getUrl($shipment);
-        $this->statuses = $this->fetchResponse($trackingUrl);
+        $responseString = $this->fetchResponse($trackingUrl);
 
-        return $this->parseResponse('');
+        return $this->parseResponse($responseString);
     }
 
     public function fetchResponse(string $uri): string

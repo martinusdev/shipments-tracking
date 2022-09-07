@@ -20,11 +20,10 @@ class SPSEndpoint extends Endpoint
     private $statuses;
 
     /**
-     * @param ParcelStatus[] $statuses
-     * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
-     * @throws \Exception
+     * @param string $responseString
+     * @return State[]
      */
-    public function parseResponse(string $statuses): array
+    public function parseResponse(string $responseString): array
     {
         $events = [];
         foreach ($this->statuses as $status) {
@@ -83,6 +82,6 @@ class SPSEndpoint extends Endpoint
 
     public function fetchResponse(string $uri): string
     {
-        dd($uri);
+        throw new \Exception('Not implemented');
     }
 }
