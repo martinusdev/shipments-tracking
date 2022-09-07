@@ -2,10 +2,10 @@
 
 namespace MartinusDev\ShipmentsTracking\Test;
 
-use MartinusDev\ShipmentsTracking\Carriers\Carrier;
 use MartinusDev\ShipmentsTracking\Carriers\UnknownCarrier;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\ShipmentsTracking;
+use MartinusDev\ShipmentsTracking\Test\TestSuite\TestHttpClient;
 
 class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase
 {
@@ -21,13 +21,14 @@ class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase
      * @param string $number
      * @param string $carrierName
      */
-    public function testDetectCarrier($number, $carrierName)
+    public function testDetectCarrier(string $number, string $carrierName)
     {
-        $carrier = Carrier::load($carrierName);
+        $testClient = new TestHttpClient();
+        $shipmentsTracking = new ShipmentsTracking(['client' => $testClient]);
 
-        $shipmentsTracking = new ShipmentsTracking();
         $detectedCarried = $shipmentsTracking->detectCarrier($number);
-        $this->assertEquals($carrier, $detectedCarried);
+
+        $this->assertEquals($carrierName, $detectedCarried->getName());
     }
 
     /**
@@ -48,6 +49,9 @@ class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase
             ['91110081000', 'GlsSk'],
             ['00104001000', 'GlsSk'],
             ['90333227133', 'GlsCz'],
+            ['7030302875110113', 'SPS'],
+            ['703-030-2875110113', 'SPS'],
+            ['703-030-28751101', 'SPS'],
         ];
     }
 

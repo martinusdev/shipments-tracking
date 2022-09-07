@@ -30,7 +30,8 @@
     }
   },
   "suggest": {
-    "guzzlehttp/guzzle": "Http Client"
+    "guzzlehttp/guzzle": "Http Client",
+    "ext-soap": "SoapClient for SPS support"
   },
   "scripts": {
     "check": [
