@@ -14,6 +14,7 @@ class Carrier implements CarrierInterface
         GlsSkCarrier::NAME,
         GlsCzCarrier::NAME,
         SPSCarrier::NAME,
+        PacketaCarrier::NAME,
     ];
 
     protected $regex;

@@ -1,6 +1,6 @@
 <?php
 
-namespace MartinusDev\ShipmentsTracking\Test;
+namespace MartinusDev\ShipmentsTracking\Test\TestCase;
 
 use MartinusDev\ShipmentsTracking\Carriers\UnknownCarrier;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
@@ -52,6 +52,7 @@ class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase
             ['7030302875110113', 'SPS'],
             ['703-030-2875110113', 'SPS'],
             ['703-030-28751101', 'SPS'],
+            ['Z4964561515', 'Packeta'],
         ];
     }
 
