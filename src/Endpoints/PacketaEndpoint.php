@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Endpoints;
 
@@ -17,9 +18,8 @@ use RuntimeException;
 
 class PacketaEndpoint extends Endpoint
 {
-
     /**
-     * @var StatusRecord[]
+     * @var \MartinusDev\ShipmentsTracking\Endpoints\Packeta\StatusRecord[]
      */
     private $statuses = [];
     /**

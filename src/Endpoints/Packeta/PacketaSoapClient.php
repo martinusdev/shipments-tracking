@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Endpoints\Packeta;
 
@@ -32,7 +33,7 @@ class PacketaSoapClient extends \SoapClient
     /**
      * @param string $apiPassword
      * @param string $packetId
-     * @return ?StatusRecords
+     * @return ?\MartinusDev\ShipmentsTracking\Endpoints\Packeta\StatusRecords
      */
     public function packetTracking(string $apiPassword, string $packetId)
     {
