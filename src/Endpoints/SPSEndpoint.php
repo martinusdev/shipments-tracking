@@ -69,7 +69,7 @@ class SPSEndpoint extends Endpoint
             case 10:
             case 44:
                 return ReceivedState::class;
-             case 71:   //Deposit in Parcel Shop
+            case 71:   //Deposit in Parcel Shop
                 return NotifiedState::class;
             case 40:
             case 42:
