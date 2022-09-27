@@ -2,6 +2,8 @@
 
 define('COMPARISIONS', __DIR__ . '/' . 'comparisons');
 
+putenv("PACKETA_API_PASSWORD=API_PASSWORD");
+
 if (is_file('vendor/autoload.php')) {
     require_once 'vendor/autoload.php';
 } else {

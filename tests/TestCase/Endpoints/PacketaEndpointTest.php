@@ -45,8 +45,7 @@ class PacketaEndpointTest extends TestCase
             'carrierName' => PacketaCarrier::NAME,
             'number' => 'Z4964561515',
             'carrier' => $packetaCarrier,
-            // 'trackingLink' => $this->getTrackingUrl($number),
-        ]);
+        ], ['loadStates' => false]);
 
         $states = $endpoint->getStates($shipment);
         $this->assertCount(2, $states);
