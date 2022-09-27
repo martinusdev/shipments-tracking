@@ -9,7 +9,7 @@ class PacketaCarrier extends Carrier
 {
     public const NAME = 'Packeta';
 
-    public const REGEX = '/^Z([0-9]{10})$/i';
+    public const REGEX = '/^(Z[0-9]{10})$/i';
 
     protected $endPointClass = PacketaEndpoint::class;
 
@@ -24,6 +24,6 @@ class PacketaCarrier extends Carrier
      */
     public function getTrackingUrl(string $number): string
     {
-        return preg_replace(self::REGEX, 'https://tracking.packeta.com/en/?id=Z4964561515', $number);
+        return preg_replace(self::REGEX, 'https://tracking.packeta.com/en/?id=$1', $number);
     }
 }
