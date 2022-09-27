@@ -1,9 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Endpoints\Packeta;
 
 class StatusRecords
 {
-    /** @var StatusRecord[] */
+    /**
+     * @var \MartinusDev\ShipmentsTracking\Endpoints\Packeta\StatusRecord[]
+     */
     public $record;
 }

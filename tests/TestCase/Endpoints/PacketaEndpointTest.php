@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Test\TestCase\Endpoints;
 
@@ -10,7 +11,6 @@ use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\ShipmentsTracking;
 use MartinusDev\ShipmentsTracking\Test\TestSuite\TestHttpClient;
 use PHPUnit\Framework\TestCase;
-use SoapClient;
 
 class PacketaEndpointTest extends TestCase
 {
@@ -18,7 +18,6 @@ class PacketaEndpointTest extends TestCase
      * @var \PHPUnit\Framework\MockObject\MockObject|SoapClient
      */
     private $soapClientMock;
-
 
     protected function setUp()
     {
@@ -59,6 +58,7 @@ class PacketaEndpointTest extends TestCase
         $status2->statusCode = 2;
         $statusRecords = new StatusRecords();
         $statusRecords->record = [$status1, $status2];
+
         return $statusRecords;
     }
 }
