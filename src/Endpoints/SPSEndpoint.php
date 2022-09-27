@@ -8,7 +8,10 @@ use MartinusDev\ShipmentsTracking\Endpoints\SPS\ParcelStatus;
 use MartinusDev\ShipmentsTracking\Endpoints\SPS\SPSParcelNumber;
 use MartinusDev\ShipmentsTracking\Endpoints\SPS\SPSSoapClient;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
+use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\DeliveredState;
+use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\NotifiedState;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\ReceivedState;
+use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\ReturnedState;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\UnknownState;
 use RuntimeException;
@@ -66,13 +69,13 @@ class SPSEndpoint extends Endpoint
             case 10:
             case 44:
                 return ReceivedState::class;
-            /*
-             case 12:
+             case 71:   //Deposit in Parcel Shop
                 return NotifiedState::class;
-            case 5:
+            case 40:
+            case 42:
                 return DeliveredState::class;
-            case 23:
-                return ReturnedState::class;*/
+            case 260:   //Return to Shipper
+                return ReturnedState::class;
         }
 
         return UnknownState::class;
