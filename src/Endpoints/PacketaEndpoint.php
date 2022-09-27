@@ -14,7 +14,6 @@ use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\ReceivedState;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\ReturnedState;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\UnknownState;
-use RuntimeException;
 
 class PacketaEndpoint extends Endpoint
 {
@@ -75,11 +74,6 @@ class PacketaEndpoint extends Endpoint
         return UnknownState::class;
     }
 
-    protected function getUrl(Shipment $shipment): string
-    {
-        throw new RuntimeException('Not implemented');
-    }
-
     /**
      * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment
      * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
@@ -93,10 +87,5 @@ class PacketaEndpoint extends Endpoint
         $this->statuses = $statusRecords->record;
 
         return $this->parseResponse('');
-    }
-
-    public function fetchResponse(string $uri): string
-    {
-        throw new \Exception('Not implemented');
     }
 }
