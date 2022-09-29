@@ -101,6 +101,7 @@ class ShipmentsTracking
 
         /** @var string|\MartinusDev\ShipmentsTracking\Carriers\CarrierInterface $carrierNamespaceName */
         $carrierNamespaceName = Carrier::getNamespaceName($name);
+
         return new $carrierNamespaceName();
     }
 
