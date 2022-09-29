@@ -84,9 +84,25 @@ class ShipmentsTracking
      */
     public function get(string $number, array $options = []): Shipment
     {
-        $carrier = $this->detectCarrier($number, $options);
+        if (isset($options['carrier'])) {
+            $carrier = $this->getCarrierByName($options['carrier']);
+        } else {
+            $carrier = $this->detectCarrier($number, $options);
+        }
 
         return $carrier->getShipment($number, $options);
+    }
+
+    private function getCarrierByName(string $name): CarrierInterface
+    {
+        if (!in_array($name, Carrier::CARRIERS)) {
+            return new UnknownCarrier();
+        }
+
+        /** @var string|\MartinusDev\ShipmentsTracking\Carriers\CarrierInterface $carrierNamespaceName */
+        $carrierNamespaceName = Carrier::getNamespaceName($name);
+        /** @var \MartinusDev\ShipmentsTracking\Carriers\CarrierInterface $carrier */
+        return new $carrierNamespaceName();
     }
 
     /**
