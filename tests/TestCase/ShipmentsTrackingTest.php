@@ -2,6 +2,7 @@
 
 namespace MartinusDev\ShipmentsTracking\Test\TestCase;
 
+use MartinusDev\ShipmentsTracking\Carriers\GlsSkCarrier;
 use MartinusDev\ShipmentsTracking\Carriers\UnknownCarrier;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\ShipmentsTracking;
@@ -62,5 +63,13 @@ class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase
         $shipment = $shipmentsTracking->get('abc');
         $this->assertInstanceOf(Shipment::class, $shipment);
         $this->assertSame('{"number":"abc","carrierName":"Unknown","trackingLink":"","states":[]}', json_encode($shipment));
+    }
+
+    public function testGetWithCarrierOption()
+    {
+        $shipmentsTracking = new ShipmentsTracking();
+        $shipment = $shipmentsTracking->get('abc', ['carrier' => GlsSkCarrier::NAME]);
+        $this->assertInstanceOf(Shipment::class, $shipment);
+        $this->assertSame('{"number":"abc","carrierName":"GlsSk","trackingLink":"https:\/\/gls-group.eu\/SK\/sk\/sledovanie-zasielok?match=abc","states":[]}', json_encode($shipment));
     }
 }
