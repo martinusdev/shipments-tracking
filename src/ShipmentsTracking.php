@@ -84,8 +84,9 @@ class ShipmentsTracking
      */
     public function get(string $number, array $options = []): Shipment
     {
-        if (isset($options['carrier'])) {
-            $carrier = $this->getCarrierByName($options['carrier']);
+        $carrierName = $options['carrier'] ?? UnknownCarrier::NAME;
+        if (in_array($carrierName, Carrier::CARRIERS)) {
+            $carrier = $this->getCarrierByName($carrierName);
         } else {
             $carrier = $this->detectCarrier($number, $options);
         }
@@ -95,10 +96,6 @@ class ShipmentsTracking
 
     private function getCarrierByName(string $name): CarrierInterface
     {
-        if (!in_array($name, Carrier::CARRIERS)) {
-            return new UnknownCarrier();
-        }
-
         /** @var string|\MartinusDev\ShipmentsTracking\Carriers\CarrierInterface $carrierNamespaceName */
         $carrierNamespaceName = Carrier::getNamespaceName($name);
 
