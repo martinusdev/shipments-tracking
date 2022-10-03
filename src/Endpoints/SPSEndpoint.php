@@ -96,7 +96,7 @@ class SPSEndpoint extends Endpoint
         $this->statuses = $this->client->getParcelStatus((int)$SPSParcelNumber->landNr, (int)$SPSParcelNumber->manNr, (int)$SPSParcelNumber->lfdNr, 'E');
 
         if (!is_array($this->statuses)) {
-            throw new \Exception('Statuses is not an array (' . json_encode($this->statuses) . ') for shipment.number ' . $shipment->number);
+            $this->statuses = [];
         }
 
         return $this->parseResponse('');
