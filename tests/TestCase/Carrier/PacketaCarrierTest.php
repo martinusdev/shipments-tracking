@@ -14,4 +14,10 @@ class PacketaCarrierTest extends TestCase
         $carrier = Carrier::load(PacketaCarrier::NAME);
         $this->assertSame('https://tracking.packeta.com/en/?id=Z4964561515', $carrier->getTrackingUrl('Z4964561515'));
     }
+
+    public function testGetTrackingUrlCs()
+    {
+        $carrier = Carrier::load(PacketaCarrier::NAME, ['languages' => ['unknown', 'cs', 'em']]);
+        $this->assertSame('https://tracking.packeta.com/cs/?id=Z4964561515', $carrier->getTrackingUrl('Z4964561515'));
+    }
 }

@@ -24,6 +24,45 @@ class PacketaCarrier extends Carrier
      */
     public function getTrackingUrl(string $number): string
     {
-        return preg_replace(self::REGEX, 'https://tracking.packeta.com/en/?id=$1', $number);
+        $lang = $this->getLanguage();
+        $trackingUrl = 'https://tracking.packeta.com/' . $lang . '/?id=$1';
+
+        return preg_replace(self::REGEX, $trackingUrl, $number);
+    }
+
+    private function getLanguage(): string
+    {
+        $supportedLanguages = [
+            'cs',
+            'de',
+            'hu',
+            'sk',
+            'pl',
+            'ro',
+            'uk',
+            'es',
+            'fr',
+            'be',
+            'pt',
+            'ru',
+            'sv',
+            'el',
+            'it',
+            'bg',
+            'sl',
+            'hr',
+            'lv',
+            'lt',
+            'et',
+            'da',
+            'fi',
+        ];
+        foreach ($this->languages as $language) {
+            if (in_array($language, $supportedLanguages)) {
+                return $language;
+            }
+        }
+
+        return 'en';
     }
 }

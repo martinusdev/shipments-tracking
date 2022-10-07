@@ -28,6 +28,10 @@ class Carrier implements CarrierInterface
      * @var ?\MartinusDev\ShipmentsTracking\Endpoints\Endpoint
      */
     protected $endPoint;
+    /**
+     * @var array<string>
+     */
+    protected $languages;
 
     /**
      * @param string $carrierName
@@ -61,9 +65,13 @@ class Carrier implements CarrierInterface
      */
     public function __construct(array $options = [])
     {
+        $options += [
+            'languages' => []
+        ];
         if ($this->endPointClass) {
             $this->endPoint = new $this->endPointClass($options);
         }
+        $this->languages = $options['languages'];
     }
 
     /**

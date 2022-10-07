@@ -18,6 +18,10 @@ class ShipmentsTracking
      * @var string[]
      */
     protected $preferredCarriers = [];
+    /**
+     * @var array<string> List of preferred languages, ISO 639-1 codes
+     */
+    private $languages;
 
     /**
      * @param array<string,mixed> $options
@@ -27,12 +31,14 @@ class ShipmentsTracking
         $options += [
             'client' => null,
             'preferredCarriers' => [],
+            'languages' => ['en'],
         ];
         if (empty($options['client'])) {
             $options['client'] = new GuzzleHttpClient();
         }
         self::$client = $options['client'];
         $this->preferredCarriers = $options['preferredCarriers'];
+        $this->languages = $options['languages'];
     }
 
     /**
@@ -56,7 +62,7 @@ class ShipmentsTracking
             $regex = constant($carrierNamespaceName . '::REGEX');
             if (preg_match($regex, $number)) {
                 /** @var \MartinusDev\ShipmentsTracking\Carriers\CarrierInterface $carrier */
-                $carrier = new $carrierNamespaceName();
+                $carrier = new $carrierNamespaceName(['languages' => $this->languages]);
 
                 return $carrier;
             }
