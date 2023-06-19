@@ -9,7 +9,7 @@ class GlsSkCarrier extends Carrier
 {
     public const NAME = 'GlsSk';
 
-    public const REGEX = '/^((91|00)[0-9]{9})|(019056[0-9]{6})$/i';
+    public const REGEX = '/^((91|00)[0-9]{9})|(019[0-9]{9})$/i';
 
     protected $endPointClass = GlsSkEndpoint::class;
 
