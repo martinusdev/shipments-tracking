@@ -54,6 +54,9 @@ class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase
             ['703-030-2875110113', 'SPS'],
             ['703-030-28751101', 'SPS'],
             ['Z4964561515', 'Packeta'],
+            ['019056424219', 'GlsSk'],
+            ['019056082280', 'GlsSk'],
+            ['019056255226', 'GlsSk'],
         ];
     }
 
