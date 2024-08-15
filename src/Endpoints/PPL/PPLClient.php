@@ -21,7 +21,7 @@ class PPLClient
     public function __construct($options = [])
     {
         $this->setCredentials();
-        $this->handler = isset($options['handler']) ?? [];
+        $this->handler = isset($options['handler']) ? $options['handler'] : [];
     }
 
     /**
