@@ -17,10 +17,9 @@ class PPLClient
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function __construct(array $options = [])
+    public function __construct()
     {
         $this->setCredentials();
-        $this->getAccessToken($options);
     }
 
     /**
@@ -30,6 +29,7 @@ class PPLClient
      */
     public function getShippingEvents(string $shipmentNumber): array
     {
+        $this->accessToken = $this->accessToken ?? $this->getAccessToken();
         $res = $this->client->get($this->authUrl . '/shipment', [
             'query' => [
                 'limit' => 1,
@@ -62,7 +62,7 @@ class PPLClient
      * @return void
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    private function getAccessToken($options = []): void
+    public function getAccessToken($options = []): void
     {
         $body = [
             'grant_type' => 'client_credentials',
