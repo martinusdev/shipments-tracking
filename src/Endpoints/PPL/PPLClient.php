@@ -13,13 +13,15 @@ class PPLClient
     private $clientId;
     private $clientSecret;
     private $accessToken;
+    private $handler;
 
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function __construct()
+    public function __construct($options = [])
     {
         $this->setCredentials();
+        $this->handler = $options['handler'] ?? [];
     }
 
     /**
@@ -62,7 +64,7 @@ class PPLClient
      * @return void
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getAccessToken($options = []): void
+    private function getAccessToken(): void
     {
         $body = [
             'grant_type' => 'client_credentials',
@@ -70,7 +72,7 @@ class PPLClient
             'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,
         ];
-        $this->client = new Client(isset($options['handler']) ? ['handler' => $options['handler']] : []);
+        $this->client = new Client($this->handler);
         $res = $this->client->post($this->authUrl . '/login/getAccessToken', [
             'form_params' => $body,
         ]);

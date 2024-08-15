@@ -33,8 +33,7 @@ class PPLEndpointTest extends TestCase
         ]);
 
         $handlerStack = HandlerStack::create($mock);
-        $client = new PPLClient();
-        $client->getAccessToken(['handler' => $handlerStack]);
+        $client = new PPLClient(['handler' => $handlerStack]);
         $endpoint = new PPLEndpoint(['client' => $client]);
 
         $pplCarrier = new PPLCarrier();
