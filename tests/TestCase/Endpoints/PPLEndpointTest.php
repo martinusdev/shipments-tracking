@@ -10,8 +10,10 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Exception\RequestException;
+use MartinusDev\ShipmentsTracking\Carriers\PPLCarrier;
 use MartinusDev\ShipmentsTracking\Endpoints\PPL\PPLClient;
 use MartinusDev\ShipmentsTracking\Endpoints\PPLEndpoint;
+use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use PHPUnit\Framework\TestCase;
 
 class PPLEndpointTest extends TestCase
@@ -34,8 +36,13 @@ class PPLEndpointTest extends TestCase
         $client = new PPLClient(['handler' => $handlerStack]);
         $endpoint = new PPLEndpoint($client);
 
-
-        $states = $endpoint->getStates(00000000001);
+        $pplCarrier = new PPLCarrier();
+        $shipment = new Shipment([
+            'carrierName' => PPLCarrier::NAME,
+            'number' => '00000000001',
+            'carrier' => $pplCarrier,
+        ], ['loadStates' => false]);
+        $states = $endpoint->getStates($shipment);
 
         $this->assertCount(1, $states);
         $this->assertSame('delivered', (string)$states[0]);

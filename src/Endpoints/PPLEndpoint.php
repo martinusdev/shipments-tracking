@@ -84,13 +84,13 @@ class PPLEndpoint extends Endpoint
     }
 
     /**
-     * @param int $shipmentNumber
+     * @param \MartinusDev\ShipmentsTracking\Shipment\Shipment $shipment
      * @return \MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State[]
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getStates($shipmentNumber)
+    public function getStates($shipment)
     {
-        $this->events = $this->client->getShippingEvents($shipmentNumber);
+        $this->events = $this->client->getShippingEvents($shipment->number);
         $this->lastEvent = end($this->events);
 
         return $this->parseResponse('');
