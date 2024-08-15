@@ -25,17 +25,17 @@ class PPLClient
     }
 
     /**
-     * @param int $shipmentNumber
+     * @param string $shipmentNumber
      * @return array<ShipmentEvent>
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getShippingEvents(int $shipmentNumber): array
+    public function getShippingEvents(string $shipmentNumber): array
     {
         $res = $this->client->get($this->authUrl . '/shipment', [
             'query' => [
                 'limit' => 1,
                 'offset' => 0,
-                'shipmentNumbers' => $shipmentNumber,
+                'shipmentNumbers' => (int)$shipmentNumber,
             ],
             'headers' => ['Authorization' => $this->accessToken],
         ]);
