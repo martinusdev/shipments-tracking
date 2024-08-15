@@ -9,6 +9,8 @@ class PPLCarrier extends Carrier
 {
     public const NAME = 'PPL';
 
+    public const REGEX = '';
+
     protected $endPointClass = PPLEndpoint::class;
 
 }

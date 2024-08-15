@@ -15,7 +15,7 @@ class PPLClient
     private $accessToken;
 
     /**
-     * @param array $options A array of config values
+     * @param array<mixed> $options A array of config values
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function __construct(array $options = [])

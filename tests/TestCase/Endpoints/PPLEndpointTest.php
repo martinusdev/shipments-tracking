@@ -34,7 +34,7 @@ class PPLEndpointTest extends TestCase
 
         $handlerStack = HandlerStack::create($mock);
         $client = new PPLClient(['handler' => $handlerStack]);
-        $endpoint = new PPLEndpoint($client);
+        $endpoint = new PPLEndpoint(['client' => $client]);
 
         $pplCarrier = new PPLCarrier();
         $shipment = new Shipment([

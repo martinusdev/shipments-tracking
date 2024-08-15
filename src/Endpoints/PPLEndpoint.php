@@ -32,10 +32,9 @@ class PPLEndpoint extends Endpoint
      */
     private $client;
 
-
-    public function __construct(PPLClient $client = null)
+    public function __construct(array $options)
     {
-        $this->client = $client ?? new PPLClient();
+        $this->client = $options['client'] ?? new PPLClient();
     }
 
     /**
