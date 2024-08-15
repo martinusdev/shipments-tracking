@@ -70,7 +70,7 @@ class PPLClient
             'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,
         ];
-        $this->client = new Client($options['handler'] ? ['handler' => $options['handler']] : []);
+        $this->client = new Client(isset($options['handler']) ? ['handler' => $options['handler']] : []);
         $res = $this->client->post($this->authUrl . '/login/getAccessToken', [
             'form_params' => $body,
         ]);
