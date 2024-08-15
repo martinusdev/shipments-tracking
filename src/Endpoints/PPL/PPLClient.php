@@ -31,7 +31,7 @@ class PPLClient
      */
     public function getShippingEvents(string $shipmentNumber): array
     {
-        $this->accessToken = $this->accessToken ?? $this->getAccessToken();
+        if (!$this->accessToken) $this->getAccessToken();
         $res = $this->client->get($this->authUrl . '/shipment', [
             'query' => [
                 'limit' => 1,
