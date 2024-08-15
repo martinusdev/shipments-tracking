@@ -15,10 +15,9 @@ class PPLClient
     private $accessToken;
 
     /**
-     * @param array<mixed> $options A array of config values
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function __construct(array $options = [])
+    public function __construct(array $options)
     {
         $this->setCredentials();
         $this->getAccessToken($options);

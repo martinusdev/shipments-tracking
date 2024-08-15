@@ -9,7 +9,7 @@ class PPLCarrier extends Carrier
 {
     public const NAME = 'PPL';
 
-    public const REGEX = '';
+    public const REGEX = '/^[0-9]$/i';
 
     protected $endPointClass = PPLEndpoint::class;
 
