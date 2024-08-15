@@ -1,0 +1,75 @@
+[
+  {
+    "shipmentNumber": "00000000001",
+    "productType": "",
+    "lastUpdateDate": "",
+    "shipmentSet": {
+      "shipmentsInSet": 0,
+      "shipmentInSetNumber": 0
+    },
+    "sender": {},
+    "recipient": {},
+    "specificDelivery": {},
+    "externalNumbers": [],
+    "services": [],
+    "trackAndTrace": {
+      "events": [
+        {
+          "statusId": 900,
+          "code": "WaitingForShipment",
+          "phase": "Order",
+          "group": "WaitingForShipment",
+          "eventDate": "2022-02-02T22:22:22",
+          "name": "Čekáme na přijetí zásilky do přepravy."
+        },
+        {
+          "statusId": 710,
+          "code": "ShipmentInTransport",
+          "phase": "InTransport",
+          "group": "ShipmentInTransport",
+          "eventDate": "2022-02-03T22:22:22",
+          "name": "Zásilka je v přepravě."
+        },
+        {
+          "statusId": 300,
+          "code": "PreparingForDelivery",
+          "phase": "InTransport",
+          "group": "PreparingForDelivery",
+          "eventDate": "2022-02-04T22:22:22",
+          "name": "Zásilka je v přepravě."
+        },
+        {
+          "statusId": 400,
+          "code": "LoadingForDelivery.TimeWindow",
+          "phase": "Delivering",
+          "group": "LoadingForDelivery",
+          "eventDate": "2022-02-05T22:22:22",
+          "name": "Zásilka se dnes doručuje."
+        },
+        {
+          "statusId": 450,
+          "code": "Delivered",
+          "phase": "Delivered",
+          "group": "Delivered",
+          "eventDate": "2022-02-06T22:22:22",
+          "name": "Zásilku jsme doručili příjemci."
+        }
+      ]
+    },
+    "shipmentWeightInfo": {
+      "weight": 1,
+      "weighedDate": "2020-02-02T22:02:22"
+    },
+    "paymentInfo": {
+      "paidByCard": false
+    },
+    "deliveryFeature": {
+      "loadDate": "2022-02-02T02:22:22",
+      "delivDate": "2022-02-02T22:22:22",
+      "delivPerson": "Test",
+      "outDepDate": "2022-02-02T02:22:22.222",
+      "deliveryToAccessPoint": false
+    },
+    "backShipmentFeature": {}
+  }
+]
