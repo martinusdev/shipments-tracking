@@ -21,7 +21,7 @@ class PPLClient
     public function __construct($options = [])
     {
         $this->setCredentials();
-        $this->handler = isset($options['handler']) ? $options['handler'] : [];
+        $this->handler = $options['handler'] ?? null;
     }
 
     /**
@@ -72,7 +72,7 @@ class PPLClient
             'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,
         ];
-        $this->client = new Client($this->handler);
+        $this->client = new Client($this->handler ? ['handler' => $this->handler] : []);
         $res = $this->client->post($this->authUrl . '/login/getAccessToken', [
             'form_params' => $body,
         ]);
