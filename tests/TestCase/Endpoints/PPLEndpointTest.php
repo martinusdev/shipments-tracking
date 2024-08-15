@@ -10,10 +10,8 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Exception\RequestException;
-use MartinusDev\ShipmentsTracking\Endpoints\GlsSkEndpoint;
 use MartinusDev\ShipmentsTracking\Endpoints\PPL\PPLClient;
 use MartinusDev\ShipmentsTracking\Endpoints\PPLEndpoint;
-use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 use PHPUnit\Framework\TestCase;
 
 class PPLEndpointTest extends TestCase
