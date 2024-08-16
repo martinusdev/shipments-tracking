@@ -6,7 +6,6 @@ use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 
 class Carrier implements CarrierInterface
 {
-
     const NAME = '';
 
     const CARRIERS = [
@@ -15,6 +14,7 @@ class Carrier implements CarrierInterface
         GlsCzCarrier::NAME,
         SPSCarrier::NAME,
         PacketaCarrier::NAME,
+        PPLCarrier::NAME,
     ];
 
     protected $regex;
