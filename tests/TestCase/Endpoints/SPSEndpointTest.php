@@ -19,7 +19,7 @@ class SPSEndpointTest extends TestCase
      */
     private $soapClientMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->soapClientMock = $this->getMockFromWsdl('https://t-t.sps-sro.sk/service_soap.php?wsdl');
 
