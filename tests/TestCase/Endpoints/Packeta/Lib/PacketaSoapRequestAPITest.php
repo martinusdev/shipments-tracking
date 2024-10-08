@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace MartinusDev\ShipmentsTracking\Test\TestCase\Endpoints\SPS\Lib;
+namespace MartinusDev\ShipmentsTracking\Test\TestCase\Endpoints\Packeta\Lib;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-class SoapRequestAPITest extends TestCase
+class PacketaSoapRequestAPITest extends TestCase
 {
     public function testCreateShipment(): void
     {
@@ -21,7 +21,7 @@ class SoapRequestAPITest extends TestCase
     {
         /** @var SoapClient&MockObject $soapClientMock */
         $soapClientMock = $this->getMockFromWsdl(
-            TESTSUITE . '/wsdl/service_soap_sps.xml',
+            TESTSUITE . '/wsdl/soap_php_bugfix_zasilkovna.wsdl',
             '',
             '',
             [],
