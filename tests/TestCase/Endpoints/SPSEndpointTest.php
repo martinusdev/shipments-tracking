@@ -10,6 +10,7 @@ use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 use MartinusDev\ShipmentsTracking\ShipmentsTracking;
 use MartinusDev\ShipmentsTracking\Test\TestSuite\TestHttpClient;
+use Nimda\Expedition\Test\TestCase\Deliverer\SPS\Lib\SoapRequestAPITest;
 use PHPUnit\Framework\TestCase;
 
 class SPSEndpointTest extends TestCase
@@ -21,8 +22,7 @@ class SPSEndpointTest extends TestCase
 
     protected function setUp()
     {
-        $this->soapClientMock = $this->getMockFromWsdl('https://t-t.sps-sro.sk/service_soap.php?wsdl');
-
+        $this->soapClientMock = (new SoapRequestAPITest())->getMockFromWsdlSpsLocal();
         $testClient = new TestHttpClient();
         new ShipmentsTracking(['client' => $testClient]);
 

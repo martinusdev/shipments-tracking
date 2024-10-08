@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 define('COMPARISIONS', __DIR__ . '/' . 'comparisons');
+define('TESTSUITE', __DIR__ . '/' . 'TestSuite');
 
 putenv('PACKETA_API_PASSWORD=API_PASSWORD');
 
