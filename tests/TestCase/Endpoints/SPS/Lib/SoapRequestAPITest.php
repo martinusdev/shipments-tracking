@@ -9,6 +9,11 @@ use PHPUnit\Framework\TestCase;
 
 class SoapRequestAPITest extends TestCase
 {
+    public function testCreateShipment(): void
+    {
+        $this->markTestIncomplete(''); // resolve warning that there are no tests in the class
+    }
+
     /**
      * @return MockObject|SoapClient
      */
