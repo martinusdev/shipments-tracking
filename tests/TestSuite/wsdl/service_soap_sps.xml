@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:Shipments" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:Shipments">
+<types>
+<xsd:schema targetNamespace="urn:Shipments"
+>
+ <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+ <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+ <xsd:complexType name="Shipment">
+  <xsd:all>
+   <xsd:element name="ShipmentNumber" type="xsd:string"/>
+   <xsd:element name="ShippingDate" type="xsd:date"/>
+   <xsd:element name="DestinationZip" type="xsd:string"/>
+   <xsd:element name="Shipper" type="xsd:string"/>
+   <xsd:element name="Receiver" type="xsd:string"/>
+   <xsd:element name="Status" type="xsd:string"/>
+   <xsd:element name="StatusCode" type="xsd:int"/>
+   <xsd:element name="NameOfReceiver" type="xsd:string"/>
+   <xsd:element name="ReferenceNumber1" type="xsd:string"/>
+   <xsd:element name="ReferenceNumber2" type="xsd:string"/>
+   <xsd:element name="ReferenceNumber3" type="xsd:string"/>
+   <xsd:element name="ReferenceNumber4" type="xsd:string"/>
+   <xsd:element name="Barcode" type="xsd:string"/>
+   <xsd:element name="InternationalReferenceNumber" type="xsd:string"/>
+   <xsd:element name="Weight" type="xsd:double"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="Parcel">
+  <xsd:all>
+   <xsd:element name="ParcelNumber" type="xsd:string"/>
+   <xsd:element name="Status" type="xsd:string"/>
+   <xsd:element name="StatusCode" type="xsd:int"/>
+   <xsd:element name="ReferenceNumber1" type="xsd:string"/>
+   <xsd:element name="ReferenceNumber2" type="xsd:string"/>
+   <xsd:element name="ReferenceNumber3" type="xsd:string"/>
+   <xsd:element name="ReferenceNumber4" type="xsd:string"/>
+   <xsd:element name="Barcode" type="xsd:string"/>
+   <xsd:element name="InternationalReferenceNumber" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="ParcelStatus">
+  <xsd:all>
+   <xsd:element name="ParcelNumber" type="xsd:string"/>
+   <xsd:element name="Date" type="xsd:date"/>
+   <xsd:element name="Time" type="xsd:time"/>
+   <xsd:element name="Status" type="xsd:string"/>
+   <xsd:element name="StatusCodeX" type="xsd:int"/>
+   <xsd:element name="Center" type="xsd:string"/>
+   <xsd:element name="Remark" type="xsd:string"/>
+   <xsd:element name="GeoLocX" type="xsd:decimal"/>
+   <xsd:element name="GeoLocY" type="xsd:decimal"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="ShipmentArray">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Shipment[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="ParcelArray">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Parcel[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="ParcelStatusArray">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:ParcelStatus[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+</xsd:schema>
+</types>
+<message name="getTestRequest"></message>
+<message name="getTestResponse"></message>
+<message name="getListOfShipmentsRequest">
+  <part name="kundenr" type="xsd:int" />
+  <part name="verknr" type="xsd:string" />
+  <part name="km_mandr" type="xsd:int" />
+  <part name="versdat" type="xsd:date" />
+  <part name="langi" type="xsd:string" /></message>
+<message name="getListOfShipmentsResponse">
+  <part name="return" type="tns:ShipmentArray" /></message>
+<message name="getShipmentDetRequest">
+  <part name="landnr" type="xsd:int" />
+  <part name="mandnr" type="xsd:int" />
+  <part name="lfdnr" type="xsd:int" />
+  <part name="langi" type="xsd:string" />
+  <part name="km_mandr" type="xsd:int" />
+  <part name="kundenr" type="xsd:int" />
+  <part name="rec_zip" type="xsd:string" /></message>
+<message name="getShipmentDetResponse">
+  <part name="return" type="tns:Shipment" /></message>
+<message name="getShipmentRequest">
+  <part name="landnr" type="xsd:int" />
+  <part name="mandnr" type="xsd:int" />
+  <part name="lfdnr" type="xsd:int" />
+  <part name="langi" type="xsd:string" /></message>
+<message name="getShipmentResponse">
+  <part name="return" type="tns:Shipment" /></message>
+<message name="getListOfParcelsDetRequest">
+  <part name="landnr" type="xsd:int" />
+  <part name="mandnr" type="xsd:int" />
+  <part name="lfdnr" type="xsd:int" />
+  <part name="langi" type="xsd:string" />
+  <part name="km_mandr" type="xsd:int" />
+  <part name="kundenr" type="xsd:int" />
+  <part name="rec_zip" type="xsd:string" /></message>
+<message name="getListOfParcelsDetResponse">
+  <part name="return" type="tns:ParcelArray" /></message>
+<message name="getListOfParcelsRequest">
+  <part name="landnr" type="xsd:int" />
+  <part name="mandnr" type="xsd:int" />
+  <part name="lfdnr" type="xsd:int" />
+  <part name="langi" type="xsd:string" /></message>
+<message name="getListOfParcelsResponse">
+  <part name="return" type="tns:ParcelArray" /></message>
+<message name="getParcelStatusDetRequest">
+  <part name="landnr" type="xsd:int" />
+  <part name="mandnr" type="xsd:int" />
+  <part name="lfdnr" type="xsd:int" />
+  <part name="langi" type="xsd:string" />
+  <part name="km_mandr" type="xsd:int" />
+  <part name="kundenr" type="xsd:int" />
+  <part name="rec_zip" type="xsd:string" /></message>
+<message name="getParcelStatusDetResponse">
+  <part name="return" type="tns:ParcelStatusArray" /></message>
+<message name="getParcelStatusRequest">
+  <part name="landnr" type="xsd:int" />
+  <part name="mandnr" type="xsd:int" />
+  <part name="lfdnr" type="xsd:int" />
+  <part name="langi" type="xsd:string" /></message>
+<message name="getParcelStatusResponse">
+  <part name="return" type="tns:ParcelStatusArray" /></message>
+<message name="get_stredisko_doruceniaRequest">
+  <part name="landnr" type="xsd:int" />
+  <part name="mandnr" type="xsd:int" />
+  <part name="lfdnr" type="xsd:int" /></message>
+<message name="get_stredisko_doruceniaResponse">
+  <part name="return" type="xsd:int" /></message>
+<portType name="WebtracePortType">
+  <operation name="getTest">
+    <input message="tns:getTestRequest"/>
+    <output message="tns:getTestResponse"/>
+  </operation>
+  <operation name="getListOfShipments">
+    <input message="tns:getListOfShipmentsRequest"/>
+    <output message="tns:getListOfShipmentsResponse"/>
+  </operation>
+  <operation name="getShipmentDet">
+    <input message="tns:getShipmentDetRequest"/>
+    <output message="tns:getShipmentDetResponse"/>
+  </operation>
+  <operation name="getShipment">
+    <input message="tns:getShipmentRequest"/>
+    <output message="tns:getShipmentResponse"/>
+  </operation>
+  <operation name="getListOfParcelsDet">
+    <input message="tns:getListOfParcelsDetRequest"/>
+    <output message="tns:getListOfParcelsDetResponse"/>
+  </operation>
+  <operation name="getListOfParcels">
+    <input message="tns:getListOfParcelsRequest"/>
+    <output message="tns:getListOfParcelsResponse"/>
+  </operation>
+  <operation name="getParcelStatusDet">
+    <input message="tns:getParcelStatusDetRequest"/>
+    <output message="tns:getParcelStatusDetResponse"/>
+  </operation>
+  <operation name="getParcelStatus">
+    <input message="tns:getParcelStatusRequest"/>
+    <output message="tns:getParcelStatusResponse"/>
+  </operation>
+  <operation name="get_stredisko_dorucenia">
+    <input message="tns:get_stredisko_doruceniaRequest"/>
+    <output message="tns:get_stredisko_doruceniaResponse"/>
+  </operation>
+</portType>
+<binding name="WebtraceBinding" type="tns:WebtracePortType">
+  <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="getTest">
+    <soap:operation soapAction="https://t-t.sps-sro.sk/service_soap.php/getTest" style="rpc"/>
+    <input><soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getListOfShipments">
+    <soap:operation soapAction="urn:Shipments#getListOfShipments" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getShipmentDet">
+    <soap:operation soapAction="urn:Shipments#getShipmentDet" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getShipment">
+    <soap:operation soapAction="urn:Shipments#getShipment" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getListOfParcelsDet">
+    <soap:operation soapAction="urn:Shipments#getListOfParcelsDet" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getListOfParcels">
+    <soap:operation soapAction="urn:Shipments#getListOfParcels" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getParcelStatusDet">
+    <soap:operation soapAction="urn:Shipments#getParcelStatusDet" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getParcelStatus">
+    <soap:operation soapAction="urn:Shipments#getParcelStatus" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="get_stredisko_dorucenia">
+    <soap:operation soapAction="urn:Shipments#get_stredisko_dorucenia" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:Shipments" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+</binding>
+<service name="Webtrace">
+  <port name="WebtracePort" binding="tns:WebtraceBinding">
+    <soap:address location="https://t-t.sps-sro.sk:443/service_soap.php"/>
+  </port>
+</service>
+</definitions>
