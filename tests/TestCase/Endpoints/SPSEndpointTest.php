@@ -20,7 +20,7 @@ class SPSEndpointTest extends TestCase
      */
     private $soapClientMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->soapClientMock = (new SPSSoapRequestAPITest())->getMockFromWsdlSpsLocal();
         $testClient = new TestHttpClient();
