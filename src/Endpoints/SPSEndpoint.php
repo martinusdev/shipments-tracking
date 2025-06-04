@@ -69,12 +69,12 @@ class SPSEndpoint extends Endpoint
             case 10:
             case 44:
                 return ReceivedState::class;
-            case 71:   //Deposit in Parcel Shop
+            case 71: // Deposit in Parcel Shop
                 return NotifiedState::class;
             case 40:
             case 42:
                 return DeliveredState::class;
-            case 260:   //Return to Shipper
+            case 260: // Return to Shipper
                 return ReturnedState::class;
         }
 
@@ -98,7 +98,6 @@ class SPSEndpoint extends Endpoint
         } else {
             $this->statuses = $this->client->getParcelStatus('', '', $SPSParcelNumber->lfdNr, 'E');
         }
-
 
         if (!is_array($this->statuses)) {
             $this->statuses = [];

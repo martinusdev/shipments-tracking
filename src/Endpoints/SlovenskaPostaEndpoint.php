@@ -33,6 +33,7 @@ class SlovenskaPostaEndpoint extends Endpoint
         if (isset($tracking['events']) && is_array($tracking['events'])) {
             return $this->parseEvents($tracking['events']);
         }
+
         return [];
     }
 

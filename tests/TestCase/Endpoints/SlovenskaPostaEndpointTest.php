@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 class SlovenskaPostaEndpointTest extends TestCase
 {
-
     public function testParseResponse()
     {
         $response = file_get_contents(COMPARISIONS . '/Endpoints/SlovenskaPosta/response_1.json');

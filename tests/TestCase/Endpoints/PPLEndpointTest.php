@@ -4,21 +4,17 @@ declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Test\TestCase\Endpoints;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Exception\RequestException;
 use MartinusDev\ShipmentsTracking\Carriers\PPLCarrier;
-use MartinusDev\ShipmentsTracking\Endpoints\PPL\PPLClient;
 use MartinusDev\ShipmentsTracking\Endpoints\PPLEndpoint;
+use MartinusDev\ShipmentsTracking\Endpoints\PPL\PPLClient;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use PHPUnit\Framework\TestCase;
 
 class PPLEndpointTest extends TestCase
 {
-
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      */

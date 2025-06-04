@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 class ShipmentTest extends TestCase
 {
-
     public function testConstruct()
     {
         $shipment = new Shipment([

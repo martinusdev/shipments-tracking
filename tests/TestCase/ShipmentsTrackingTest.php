@@ -4,8 +4,8 @@ namespace MartinusDev\ShipmentsTracking\Test\TestCase;
 
 use MartinusDev\ShipmentsTracking\Carriers\GlsSkCarrier;
 use MartinusDev\ShipmentsTracking\Carriers\UnknownCarrier;
-use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\ShipmentsTracking;
+use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\Test\TestSuite\TestHttpClient;
 
 class ShipmentsTrackingTest extends \PHPUnit\Framework\TestCase

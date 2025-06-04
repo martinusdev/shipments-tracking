@@ -16,6 +16,7 @@ class PPLClient
     private $handler;
 
     /**
+     * @param array<string, mixed> $options
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function __construct($options = [])
@@ -31,7 +32,9 @@ class PPLClient
      */
     public function getShippingEvents(string $shipmentNumber): array
     {
-        if (!$this->accessToken) $this->getAccessToken();
+        if (!$this->accessToken) {
+            $this->getAccessToken();
+        }
         $res = $this->client->get($this->authUrl . '/shipment', [
             'query' => [
                 'limit' => 1,
