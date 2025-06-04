@@ -19,14 +19,31 @@ class SPSParcelNumber
      * @var string
      */
     public $lfdNr;
+    /**
+     * @var int
+     */
+    public $version;
 
     public function __construct(string $parcelNumber)
     {
-        if (!preg_match(SPSCarrier::REGEX, $parcelNumber, $match)) {
-            throw new \InvalidArgumentException('Not matched SPS number: ' . $parcelNumber);
+        // v1 tracking number format
+        if (preg_match(SPSCarrier::REGEX, $parcelNumber, $match) === 1) {
+            $this->landNr = $match[1];
+            $this->manNr = $match[2];
+            $this->lfdNr = $match[3];
+            $this->version = 1;
+
+            return;
         }
-        $this->landNr = $match[1];
-        $this->manNr = $match[2];
-        $this->lfdNr = $match[3];
+
+        // v2 tracking number format (SK<alphanum_znaky>)
+        if (strtolower(substr($parcelNumber,0, 2)) === 'sk') {
+            $this->lfdNr = $parcelNumber;
+            $this->version = 2;
+
+            return;
+        }
+
+        throw new \InvalidArgumentException('Not matched SPS number: ' . $parcelNumber);
     }
 }
