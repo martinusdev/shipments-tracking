@@ -37,7 +37,7 @@ class SPSParcelNumber
         }
 
         // v2 tracking number format (SK<alphanum_znaky>)
-        if (strtolower(substr($parcelNumber,0, 2)) === 'sk') {
+        if (strtolower(substr($parcelNumber, 0, 2)) === 'sk') {
             $this->lfdNr = $parcelNumber;
             $this->version = 2;
 
