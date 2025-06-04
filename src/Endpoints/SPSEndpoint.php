@@ -96,7 +96,7 @@ class SPSEndpoint extends Endpoint
         if ($SPSParcelNumber->version === 1) {
             $this->statuses = $this->client->getParcelStatus((int)$SPSParcelNumber->landNr, (int)$SPSParcelNumber->manNr, (int)$SPSParcelNumber->lfdNr, 'E');
         } else {
-            $this->statuses = []; // todo handle version 2
+            $this->statuses = $this->client->getParcelStatus('', '', $SPSParcelNumber->lfdNr, 'E');
         }
 
 
