@@ -20,7 +20,7 @@ class PacketaEndpointTest extends TestCase
      */
     private $soapClientMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->soapClientMock = (new PacketaSoapRequestAPITest())->getMockFromWsdlSpsLocal();
 
