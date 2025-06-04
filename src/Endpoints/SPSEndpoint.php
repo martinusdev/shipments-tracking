@@ -93,7 +93,12 @@ class SPSEndpoint extends Endpoint
     public function getStates(Shipment $shipment)
     {
         $SPSParcelNumber = new SPSParcelNumber($shipment->number);
-        $this->statuses = $this->client->getParcelStatus((int)$SPSParcelNumber->landNr, (int)$SPSParcelNumber->manNr, (int)$SPSParcelNumber->lfdNr, 'E');
+        if ($SPSParcelNumber->version === 1) {
+            $this->statuses = $this->client->getParcelStatus((int)$SPSParcelNumber->landNr, (int)$SPSParcelNumber->manNr, (int)$SPSParcelNumber->lfdNr, 'E');
+        } else {
+            $this->statuses = $this->client->getParcelStatus('', '', $SPSParcelNumber->lfdNr, 'E');
+        }
+
 
         if (!is_array($this->statuses)) {
             $this->statuses = [];

@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       extensions: mbstring, xml, ctype, iconv, imagick, openssl, intl
-      key: cache-v20211221-1 # can be any string, change to clear the extension cache.
+      key: cache-v20250604-1 # can be any string, change to clear the extension cache.
     strategy:
       fail-fast: false
       max-parallel: 3
@@ -27,7 +27,7 @@ jobs:
           key: ${{ env.key }}
 
       - name: Cache extensions
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{ steps.cache-env.outputs.dir }}
           key: ${{ steps.cache-env.outputs.key }}
