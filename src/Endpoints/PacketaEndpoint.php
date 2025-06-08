@@ -26,8 +26,10 @@ class PacketaEndpoint extends Endpoint
      */
     private $client;
 
-    public function __construct()
+    public function __construct(array $options = [])
     {
+        parent::__construct($options);
+
         $this->client = new PacketaSoapClient();
     }
 

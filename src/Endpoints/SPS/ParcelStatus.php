@@ -145,4 +145,19 @@ class ParcelStatus
     {
         return $this->GeoLocY;
     }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            $data['parcelNumber'] ?? '',
+            $data['date'] ?? '',
+            $data['time'] ?? '',
+            $data['status'] ?? '',
+            $data['statusCodeX'] ?? 0,
+            $data['center'] ?? '',
+            $data['remark'] ?? '',
+            $data['geoLocX'] ?? 0.0,
+            $data['geoLocY'] ?? 0.0
+        );
+    }
 }

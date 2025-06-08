@@ -59,14 +59,13 @@ class Carrier implements CarrierInterface
     }
 
     /**
-     * Carrier constructor.
-     *
      * @param array $options
      */
     public function __construct(array $options = [])
     {
         $options += [
             'languages' => [],
+            'credentials' => [],
         ];
         if ($this->endPointClass) {
             $this->endPoint = new $this->endPointClass($options);
