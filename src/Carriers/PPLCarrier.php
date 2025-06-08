@@ -18,5 +18,4 @@ class PPLCarrier extends Carrier
     {
         return 'https://www.ppl.cz/vyhledat-zasilku?shipmentId=' . $number;
     }
-
 }

@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace MartinusDev\ShipmentsTracking\Test\TestCase\Endpoints;
 
 use MartinusDev\ShipmentsTracking\Carriers\SPSCarrier;
-use MartinusDev\ShipmentsTracking\Endpoints\SPS\ParcelStatus;
 use MartinusDev\ShipmentsTracking\Endpoints\SPSEndpoint;
+use MartinusDev\ShipmentsTracking\Endpoints\SPS\ParcelStatus;
+use MartinusDev\ShipmentsTracking\ShipmentsTracking;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
-use MartinusDev\ShipmentsTracking\ShipmentsTracking;
 use MartinusDev\ShipmentsTracking\Test\TestCase\Endpoints\SPS\Lib\SPSSoapRequestAPITest;
 use MartinusDev\ShipmentsTracking\Test\TestSuite\TestHttpClient;
 use PHPUnit\Framework\TestCase;
@@ -20,7 +20,7 @@ class SPSEndpointTest extends TestCase
      */
     private $soapClientMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->soapClientMock = (new SPSSoapRequestAPITest())->getMockFromWsdlSpsLocal();
         $testClient = new TestHttpClient();

@@ -30,9 +30,8 @@ class Shipment implements JsonSerializable
     public $states;
 
     /**
-     * Shipment constructor.
-     *
-     * @param array<string,mixed> $data
+     * @param array<string, mixed> $data
+     * @param array<string, mixed> $options
      */
     public function __construct(array $data, array $options = [])
     {

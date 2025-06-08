@@ -2,8 +2,8 @@
 
 namespace MartinusDev\ShipmentsTracking\Endpoints;
 
-use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\ShipmentsTracking;
+use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 
 abstract class Endpoint
 {

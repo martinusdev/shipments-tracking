@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace MartinusDev\ShipmentsTracking\Test\TestCase\Endpoints;
 
 use MartinusDev\ShipmentsTracking\Carriers\PacketaCarrier;
+use MartinusDev\ShipmentsTracking\Endpoints\PacketaEndpoint;
 use MartinusDev\ShipmentsTracking\Endpoints\Packeta\StatusRecord;
 use MartinusDev\ShipmentsTracking\Endpoints\Packeta\StatusRecords;
-use MartinusDev\ShipmentsTracking\Endpoints\PacketaEndpoint;
-use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\ShipmentsTracking;
+use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\Test\TestCase\Endpoints\Packeta\Lib\PacketaSoapRequestAPITest;
 use MartinusDev\ShipmentsTracking\Test\TestSuite\TestHttpClient;
 use PHPUnit\Framework\TestCase;
@@ -20,7 +20,7 @@ class PacketaEndpointTest extends TestCase
      */
     private $soapClientMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->soapClientMock = (new PacketaSoapRequestAPITest())->getMockFromWsdlSpsLocal();
 

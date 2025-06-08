@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace MartinusDev\ShipmentsTracking\Carriers;
 
-use MartinusDev\ShipmentsTracking\Endpoints\SPS\SPSParcelNumber;
 use MartinusDev\ShipmentsTracking\Endpoints\SPSEndpoint;
+use MartinusDev\ShipmentsTracking\Endpoints\SPS\SPSParcelNumber;
 
 class SPSCarrier extends Carrier
 {

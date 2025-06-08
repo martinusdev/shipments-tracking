@@ -14,7 +14,6 @@ use PHPUnit\Framework\TestCase;
 
 class CarrierTest extends TestCase
 {
-
     public function testLoadExists()
     {
         $name = 'SlovenskaPosta';

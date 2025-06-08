@@ -9,12 +9,12 @@ jobs:
     env:
       APP_ENV: test
       extensions: mbstring, xml, ctype, iconv, mysql, imagick, openssl, intl
-      key: cache-v20250604 # can be any string, change to clear the extension cache.
+      key: cache-v20250604-2 # can be any string, change to clear the extension cache.
     strategy:
       fail-fast: false
       max-parallel: 3
       matrix:
-        php-versions: [ '7.3', '7.4' ]
+        php-versions: [ '8.0' ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -51,7 +51,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Cache Composer dependencies # https://github.com/shivammathur/setup-php#cache-composer-dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composercache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ matrix.php-versions }}-${{ env.key }}-${{ hashFiles('**/composer.lock') }}
