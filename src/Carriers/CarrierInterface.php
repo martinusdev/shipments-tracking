@@ -3,13 +3,10 @@
 namespace MartinusDev\ShipmentsTracking\Carriers;
 
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
-use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\State;
 
 interface CarrierInterface
 {
     /**
-     * CarrierInterface constructor.
-     *
      * @param array<string,mixed> $options
      */
     public function __construct(array $options = []);

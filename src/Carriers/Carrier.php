@@ -59,8 +59,6 @@ class Carrier implements CarrierInterface
     }
 
     /**
-     * Carrier constructor.
-     *
      * @param array $options
      */
     public function __construct(array $options = [])

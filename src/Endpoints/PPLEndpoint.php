@@ -34,6 +34,8 @@ class PPLEndpoint extends Endpoint
 
     public function __construct(array $options)
     {
+        parent::__construct($options);
+
         $this->client = $options['client'] ?? new PPLClient();
     }
 

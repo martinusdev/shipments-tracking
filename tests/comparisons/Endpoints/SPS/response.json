@@ -1,0 +1,150 @@
+{
+  "resultCode": 200,
+  "resultMessage": "SuccessRequest",
+  "payload": [
+    {
+      "parcelNumber": "SK0S9X123456789P3T",
+      "date": "2025-06-06",
+      "time": "12:10:47.000",
+      "status": "Confirmation of Delivery",
+      "statusCodeX": 40,
+      "center": "SPS Levice",
+      "remark": null,
+      "geoLocX": 0,
+      "geoLocY": 0,
+      "eventRemark": null
+    },
+    {
+      "parcelNumber": "SK0S9X123456789P3T",
+      "date": "2025-06-06",
+      "time": "10:33:10.000",
+      "status": "Prenotification by Email",
+      "statusCodeX": 21,
+      "center": "SPS Billing Dept.",
+      "remark": null,
+      "geoLocX": 0,
+      "geoLocY": 0,
+      "eventRemark": null
+    },
+    {
+      "parcelNumber": "SK0S9X123456789P3T",
+      "date": "2025-06-06",
+      "time": "10:27:01.000",
+      "status": "Prenotification by SMS",
+      "statusCodeX": 22,
+      "center": "SPS Billing Dept.",
+      "remark": null,
+      "geoLocX": 0,
+      "geoLocY": 0,
+      "eventRemark": null
+    },
+    {
+      "parcelNumber": "SK0S9X123456789P3T",
+      "date": "2025-06-06",
+      "time": "10:24:10.000",
+      "status": "Deposit in parcel terminal",
+      "statusCodeX": 72,
+      "center": "SPS Levice",
+      "remark": null,
+      "geoLocX": 0,
+      "geoLocY": 0,
+      "eventRemark": null
+    },
+    {
+      "parcelNumber": "SK0S9X123456789P3T",
+      "date": "2025-06-06",
+      "time": "10:22:57.000",
+      "status": "Remark",
+      "statusCodeX": 64,
+      "center": "SPS Levice",
+      "remark": null,
+      "geoLocX": 0,
+      "geoLocY": 0,
+      "eventRemark": null
+    },
+    {
+      "parcelNumber": "SK0S9X123456789P3T",
+      "date": "2025-06-06",
+      "time": "10:19:33.000",
+      "status": "Remark",
+      "statusCodeX": 64,
+      "center": "SPS Levice",
+      "remark": null,
+      "geoLocX": 0,
+      "geoLocY": 0,
+      "eventRemark": null
+    },
+    {
+      "parcelNumber": "SK0S9X123456789P3T",
+      "date": "2025-06-06",
+      "time": "08:41:08.000",
+      "status": "Loaded for Delivery",
+      "statusCodeX": 30,
+      "center": "SPS Levice",
+      "remark": null,
+      "geoLocX": 0,
+      "geoLocY": 0,
+      "eventRemark": null
+    },
+    {
+      "parcelNumber": "SK0S9X123456789P3T",
+      "date": "2025-06-06",
+      "time": "03:11:40.000",
+      "status": "Weight Update",
+      "statusCodeX": 14,
+      "center": "SPS Bratislava",
+      "remark": null,
+      "geoLocX": 0,
+      "geoLocY": 0,
+      "eventRemark": null
+    },
+    {
+      "parcelNumber": "SK0S9X123456789P3T",
+      "date": "2025-06-05",
+      "time": "21:44:13.000",
+      "status": "Remark",
+      "statusCodeX": 64,
+      "center": "SPS Levice",
+      "remark": null,
+      "geoLocX": 0,
+      "geoLocY": 0,
+      "eventRemark": null
+    },
+    {
+      "parcelNumber": "SK0S9X123456789P3T",
+      "date": "2025-06-05",
+      "time": "21:29:59.000",
+      "status": "Initialization",
+      "statusCodeX": 10,
+      "center": "SPS Žilina",
+      "remark": null,
+      "geoLocX": 0,
+      "geoLocY": 0,
+      "eventRemark": null
+    },
+    {
+      "parcelNumber": "SK0S9X123456789P3T",
+      "date": "2025-06-05",
+      "time": "21:25:47.000",
+      "status": "Remark",
+      "statusCodeX": 64,
+      "center": "SPS Žilina",
+      "remark": null,
+      "geoLocX": 0,
+      "geoLocY": 0,
+      "eventRemark": null
+    },
+    {
+      "parcelNumber": "SK0S9X123456789P3T",
+      "date": "2025-06-05",
+      "time": "12:15:09.000",
+      "status": "Remark",
+      "statusCodeX": 64,
+      "center": "SPS Billing Dept.",
+      "remark": null,
+      "geoLocX": 0,
+      "geoLocY": 0,
+      "eventRemark": null
+    }
+  ]
+}

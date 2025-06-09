@@ -16,9 +16,13 @@ class SPSParcelNumberTest extends TestCase
     public function testParse(string $in)
     {
         $SPSParcelNumber = new SPSParcelNumber($in);
-        $this->assertSame('703', $SPSParcelNumber->landNr);
-        $this->assertSame('010', $SPSParcelNumber->manNr);
-        $this->assertSame('28751101', $SPSParcelNumber->lfdNr);
+        if ($SPSParcelNumber->version === 1) {
+            $this->assertSame('703', $SPSParcelNumber->landNr);
+            $this->assertSame('010', $SPSParcelNumber->manNr);
+            $this->assertSame('28751101', $SPSParcelNumber->lfdNr);
+        } else {
+            $this->assertSame($in, $SPSParcelNumber->lfdNr);
+        }
     }
 
     public function ValidNumbersProvider()
@@ -28,6 +32,7 @@ class SPSParcelNumberTest extends TestCase
             'with-checksum' => ['703-010-2875110112'],
             'api-number' => ['7030102875110112'],
             'short-api-number' => ['70301028751101'],
+            'v2basic' => ['SK0S9X852000000VUB'],
         ];
     }
 }

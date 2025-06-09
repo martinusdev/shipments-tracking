@@ -10,14 +10,15 @@
     "php": ">=8.0",
     "ext-json": "*",
     "ext-simplexml": "*",
-    "cakephp/chronos": "^1.2|^2.0"
+    "cakephp/chronos": "^1.2|^2.0",
+    "guzzlehttp/guzzle": "^7.9",
+    "ext-soap": "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.0",
     "cakephp/cakephp-codesniffer": "^3.0",
     "phpunit/phpunit": "^9.6",
-    "phpstan/phpstan": "~1.4",
-    "guzzlehttp/guzzle": "^7.9"
+    "phpstan/phpstan": "~1.4"
   },
   "autoload": {
     "psr-4": {
@@ -30,8 +31,6 @@
     }
   },
   "suggest": {
-    "guzzlehttp/guzzle": "Http Client",
-    "ext-soap": "SoapClient for SPS support"
   },
   "scripts": {
     "check": [
@@ -42,6 +41,6 @@
     "cs-fix": "phpcbf --colors --parallel=16 -p src/ tests/",
     "test": "phpunit --no-coverage",
     "test-coverage": "phpunit --coverage-clover=clover.xml",
-    "phpstan": "composer require guzzlehttp/guzzle && phpstan analyse -l 5 src/"
+    "phpstan": "phpstan analyse -l 5 src/"
   }
 }

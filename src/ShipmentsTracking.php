@@ -4,6 +4,7 @@ namespace MartinusDev\ShipmentsTracking;
 
 use MartinusDev\ShipmentsTracking\Carriers\Carrier;
 use MartinusDev\ShipmentsTracking\Carriers\CarrierInterface;
+use MartinusDev\ShipmentsTracking\Carriers\SPSCarrier;
 use MartinusDev\ShipmentsTracking\Carriers\UnknownCarrier;
 use MartinusDev\ShipmentsTracking\HttpClient\GuzzleHttpClient;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
@@ -22,6 +23,10 @@ class ShipmentsTracking
      * @var array<string> List of preferred languages, ISO 639-1 codes
      */
     private $languages;
+    /**
+     * @var array<string, mixed>
+     */
+    private $carrierOptions;
 
     /**
      * @param array<string,mixed> $options
@@ -32,6 +37,11 @@ class ShipmentsTracking
             'client' => null,
             'preferredCarriers' => [],
             'languages' => ['en'],
+            'carrierOptions' => [
+                SPSCarrier::NAME => [
+                    'apiKey' => '',
+                ],
+            ],
         ];
         if (empty($options['client'])) {
             $options['client'] = new GuzzleHttpClient();
@@ -39,6 +49,7 @@ class ShipmentsTracking
         self::$client = $options['client'];
         $this->preferredCarriers = $options['preferredCarriers'];
         $this->languages = $options['languages'];
+        $this->carrierOptions = $options['carrierOptions'];
     }
 
     /**
@@ -62,7 +73,7 @@ class ShipmentsTracking
             $regex = constant($carrierNamespaceName . '::REGEX');
             if (preg_match($regex, $number)) {
                 /** @var \MartinusDev\ShipmentsTracking\Carriers\CarrierInterface $carrier */
-                $carrier = new $carrierNamespaceName(['languages' => $this->languages]);
+                $carrier = new $carrierNamespaceName($this->getCarrierOptions($name));
 
                 return $carrier;
             }
@@ -105,7 +116,16 @@ class ShipmentsTracking
         /** @var string|\MartinusDev\ShipmentsTracking\Carriers\CarrierInterface $carrierNamespaceName */
         $carrierNamespaceName = Carrier::getNamespaceName($name);
 
-        return new $carrierNamespaceName();
+        return new $carrierNamespaceName($this->getCarrierOptions($name));
+    }
+
+    /**
+     * @param string $carrierName
+     * @return array<string, mixed>
+     */
+    private function getCarrierOptions(string $carrierName): array
+    {
+        return ['languages' => $this->languages] + ($this->carrierOptions[$carrierName] ?? []);
     }
 
     /**

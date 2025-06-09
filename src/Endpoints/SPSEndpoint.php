@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace MartinusDev\ShipmentsTracking\Endpoints;
 
 use Cake\Chronos\Chronos;
+use GuzzleHttp\Client;
 use MartinusDev\ShipmentsTracking\Endpoints\SPS\ParcelStatus;
 use MartinusDev\ShipmentsTracking\Endpoints\SPS\SPSParcelNumber;
-use MartinusDev\ShipmentsTracking\Endpoints\SPS\SPSSoapClient;
 use MartinusDev\ShipmentsTracking\Shipment\Shipment;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\DeliveredState;
 use MartinusDev\ShipmentsTracking\Shipment\ShipmentStates\NotifiedState;
@@ -23,18 +23,49 @@ class SPSEndpoint extends Endpoint
      */
     private $statuses = [];
     /**
-     * @var \SoapClient
+     * @var \GuzzleHttp\Client
      */
-    private $client;
+    private Client $client;
+    private string $apiKey;
+    private string $apiUrl;
 
-    public function __construct()
+    /**
+     * @param array{client?: \GuzzleHttp\Client, apiKey?: string, apiUrl?: string} $options
+     */
+    public function __construct(array $options = [])
     {
-        $this->client = new SPSSoapClient();
+        parent::__construct($options);
+
+        $this->apiKey = $this->options['apiKey'] ?? '';
+        $this->apiUrl = $this->options['apiUrl'] ?? 'https://trackandtraceapi.nesy.sps-sro.sk/api/sk/v1/TrackAndTrace';
+        $this->client = $this->options['client'] ?? new Client();
     }
 
-    public function setClient(\SoapClient $client): void
+    public function getParcelStatus(SPSParcelNumber $parcel, string $language): string
     {
-        $this->client = $client;
+        $requestData = json_encode([
+            'langi' => $language,
+            'landnr' => $parcel->landNr,
+            'mandnr' => $parcel->manNr,
+            'lfdnr' => $parcel->lfdNr,
+        ]);
+
+        if ($requestData === false) {
+            throw new \RuntimeException('Failed to encode request data: ' . json_last_error_msg());
+        }
+
+        $response = $this->client->post(
+            $this->apiUrl . '/GetParcelStatus?apikey=' . $this->apiKey,
+            [
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                ],
+                'body' => $requestData,
+            ]
+        );
+
+        return $response->getStatusCode() === 200 ? $response->getBody()->getContents() : '';
     }
 
     /**
@@ -49,6 +80,25 @@ class SPSEndpoint extends Endpoint
         }
 
         return $events;
+    }
+
+    /**
+     * @param string $responseString
+     * @return ParcelStatus[]
+     */
+    private function parseStatusJson(string $responseString): array
+    {
+        $response = json_decode($responseString, true);
+        if (!is_array($response) || $response['resultCode'] !== 200 || !is_array($response['payload'])) {
+            return [];
+        }
+
+        $statuses = [];
+        foreach ($response['payload'] as $status) {
+            $statuses[] = ParcelStatus::fromArray($status);
+        }
+
+        return $statuses;
     }
 
     public function parseEvent(ParcelStatus $status): State
@@ -93,15 +143,8 @@ class SPSEndpoint extends Endpoint
     public function getStates(Shipment $shipment)
     {
         $SPSParcelNumber = new SPSParcelNumber($shipment->number);
-        if ($SPSParcelNumber->version === 1) {
-            $this->statuses = $this->client->getParcelStatus((int)$SPSParcelNumber->landNr, (int)$SPSParcelNumber->manNr, (int)$SPSParcelNumber->lfdNr, 'E');
-        } else {
-            $this->statuses = $this->client->getParcelStatus('', '', $SPSParcelNumber->lfdNr, 'E');
-        }
-
-        if (!is_array($this->statuses)) {
-            $this->statuses = [];
-        }
+        $responseString = $this->getParcelStatus($SPSParcelNumber, 'EN');
+        $this->statuses = $this->parseStatusJson($responseString);
 
         return $this->parseResponse('');
     }
