@@ -26,4 +26,10 @@ class SPSCarrierTest extends TestCase
         $carrier = Carrier::load(SPSCarrier::NAME);
         $this->assertSame('https://t-t.sps-sro.sk/result.php/?cmd=SDG_SEARCH&sprache=SK&sdg_landnr=703&sdg_mandnr=030&sdg_lfdnr=28751101', $carrier->getTrackingUrl('703-030-2875110112'));
     }
+
+    public function testGetTrackingUrlV2()
+    {
+        $carrier = Carrier::load(SPSCarrier::NAME);
+        $this->assertSame('https://t-t.sps-sro.sk/result.php/?cmd=SDG_SEARCH&sprache=SK&sdg_lfdnr=SK0S9X858000000GPM', $carrier->getTrackingUrl('SK0S9X858000000GPM'));
+    }
 }
