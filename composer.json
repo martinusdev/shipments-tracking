@@ -11,7 +11,7 @@
     "ext-json": "*",
     "ext-simplexml": "*",
     "cakephp/chronos": "^1.2|^2.0",
-    "guzzlehttp/guzzle": "^7.9",
+    "guzzlehttp/guzzle": "^7.4.9",
     "ext-soap": "*"
   },
   "require-dev": {
