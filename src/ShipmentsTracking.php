@@ -26,7 +26,7 @@ class ShipmentsTracking
     /**
      * @var array<string, mixed>
      */
-    private $credentials;
+    private $carrierOptions;
 
     /**
      * @param array<string,mixed> $options
@@ -37,7 +37,7 @@ class ShipmentsTracking
             'client' => null,
             'preferredCarriers' => [],
             'languages' => ['en'],
-            'credentials' => [
+            'carrierOptions' => [
                 SPSCarrier::NAME => [
                     'apiKey' => '',
                 ],
@@ -49,7 +49,7 @@ class ShipmentsTracking
         self::$client = $options['client'];
         $this->preferredCarriers = $options['preferredCarriers'];
         $this->languages = $options['languages'];
-        $this->credentials = $options['credentials'];
+        $this->carrierOptions = $options['carrierOptions'];
     }
 
     /**
@@ -73,10 +73,7 @@ class ShipmentsTracking
             $regex = constant($carrierNamespaceName . '::REGEX');
             if (preg_match($regex, $number)) {
                 /** @var \MartinusDev\ShipmentsTracking\Carriers\CarrierInterface $carrier */
-                $carrier = new $carrierNamespaceName([
-                    'languages' => $this->languages,
-                    'credentials' => $this->getCredentials($name),
-                ]);
+                $carrier = new $carrierNamespaceName($this->getCarrierOptions($name));
 
                 return $carrier;
             }
@@ -119,16 +116,16 @@ class ShipmentsTracking
         /** @var string|\MartinusDev\ShipmentsTracking\Carriers\CarrierInterface $carrierNamespaceName */
         $carrierNamespaceName = Carrier::getNamespaceName($name);
 
-        return new $carrierNamespaceName(['credentials' => $this->getCredentials($name)]);
+        return new $carrierNamespaceName($this->getCarrierOptions($name));
     }
 
     /**
      * @param string $carrierName
      * @return array<string, mixed>
      */
-    private function getCredentials(string $carrierName): array
+    private function getCarrierOptions(string $carrierName): array
     {
-        return $this->credentials[$carrierName] ?? [];
+        return ['languages' => $this->languages] + ($this->carrierOptions[$carrierName] ?? []);
     }
 
     /**

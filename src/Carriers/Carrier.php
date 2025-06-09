@@ -65,7 +65,6 @@ class Carrier implements CarrierInterface
     {
         $options += [
             'languages' => [],
-            'credentials' => [],
         ];
         if ($this->endPointClass) {
             $this->endPoint = new $this->endPointClass($options);
